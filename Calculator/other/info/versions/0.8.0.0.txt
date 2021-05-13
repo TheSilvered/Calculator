@@ -1,0 +1,8 @@
+
+Beta 0.8.0.0
+Changelog:
+- now the program no longer crashes when trying to do X / 0 or 0R X (X is any number)
+- now the program no longer crashes when trying to do 2R -1
+- now 0^0 retrieves "Undetermined"
+- added complex number compatibility
+- added command _acal

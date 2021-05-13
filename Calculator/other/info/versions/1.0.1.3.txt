@@ -1,0 +1,45 @@
+
+Version 1.0.1.3
+######### Changelog #########
+
+Additions:
+   - added monomial recognition function
+   - a new set has been added: '$err'
+   - in the $msg set have been added:
+     @settings_res
+     @mem_res (different form @mem_res in $inp)
+
+   - in the $err set have been added:
+     @no_such_cmd
+     @no_such_lang
+
+   - added more descriptive error and output messages for commands
+
+Changes:
+   - changed command format for '_open' and '_save'
+   - now all redundant parenthesis will be ignored
+   - 'commands.py' in the calclog.log file has been renamed to 'cmds.py'
+   - in the .lang files some attributes have been renamed:
+     @True -> @true
+     @False -> @false
+     @US_UK_sys -> @us_uk_sys
+     @error -> @syntax_error
+     @del_all_mem -> @mem_res
+
+   - the commands moved in $err are:
+     @syntax_error
+     @complex
+     @file_not_found
+     @invalid_command
+     @permission_error
+     @num_in_mem
+     @no_mem_cell
+     @invalid_answer
+
+Fixes:
+   - now '_vshs last' will always display the latest version
+   - fixed a bug that caused '((' to be considered a multiplication
+   - fixed several inconsistencies between .lang files
+   - fixed a bug that caused ')N' to remove the first cipher from the number
+   - now the return value of the Monomial() class is of Monomial type
+   - the program no longer crashes when trying to load an invalid language

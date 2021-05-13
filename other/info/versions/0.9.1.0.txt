@@ -1,0 +1,5 @@
+
+Beta 0.9.1.0
+Changelog:
+- added number fixing
+- now 1.000,1 is seen as a valid number

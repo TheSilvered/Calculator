@@ -1,0 +1,27 @@
+
+Version 1.0.1.6
+######### Changelog #########
+
+Additions:
+   - added polynomial support, missing powers and fractions
+   - added attribute @name_error in the $err set
+   - added @*ltrl attribute in the $cmd set
+
+Changes:
+   - changed message for '_help vshs'
+   - changed @advanced_help message, now the #ltrl command is listed
+   - removed @non_sim_mon_error from $err
+
+Fixes:
+   - fixed a bug that caused the program to crash when inserting some symbols
+     inside the path with the commands _open, _save and _vshs
+   - fixed a bug that caused forward slashes to be displayed when using the commands
+     _open or _save
+   - fixed a bug that displayed the file_saved message without having saved the file
+   - fixed a bug that created a '1' when trying to input '(-' in the literal mode
+     es. Input: (-1)  Output: 1 - 1 = 0
+   - fixed a bug that caused the 'Save file path' message in the calclog.log file
+     to have INFO and cmds.py inverted
+   - fixed @file_not_found message in EN.lang that would be in Italian
+   - fixed @non_int_pow_error messages for French and Spanish
+   - fixed @advanced_help message for French where the 6th line would be in Spanish

@@ -1,0 +1,22 @@
+
+Version 1.0.1.2
+######### Changelog #########
+
+Additions:
+   - now to see the new features type '_vshs last'
+   - added basic calculations to the Monomial() class, not accessible yet
+   - now 'N(' and ')N' are considered multiplications
+   - added '$cmd' set on .lang files
+   - added commands attributes on .lang files (@acal, @addm, @advn...)
+   - added .lang file template: 'empty.lang'
+
+Changes:
+   - updated info message
+   - now the file nums.mem is accessible
+   - changed command format for '_lang', input '_help lang' for more details
+   - changed _lang files comments
+   - now commands infos are in the .lang files
+
+Fixes:
+   - now the numbers are fixed correctly
+   - now N / 0 no longer equals @undetermined but @impossible

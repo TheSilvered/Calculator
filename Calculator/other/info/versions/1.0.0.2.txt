@@ -1,0 +1,11 @@
+
+Version 1.0.0.2
+######### Changelog #########
+
+Changes:
+   - now the file extension for 'settings' and 'acronym_lang' is .clc
+   - now thw file extension for the languages is .lan
+   - command _seem renamed to _smem
+
+Fixes:
+   - when inserting the input in the #cmem command now a blank line appears

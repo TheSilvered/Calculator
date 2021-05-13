@@ -1,0 +1,10 @@
+
+Version 1.0.0.6
+######### Changelog #########
+
+Changes:
+   - now you can save/open memory files in other directories
+
+Fixes:
+   - now the output with a complex number now displays always correctly
+   - _acal now works consistently

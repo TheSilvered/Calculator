@@ -1,0 +1,4 @@
+
+Beta 0.6.0.0
+Changelog:
+- now the current settings are saved in the file 'settings.json'

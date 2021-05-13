@@ -1,0 +1,81 @@
+
+Version 1.0.2.1
+######### Changelog #########
+Additions:
+   - added commands _memr, _sets, _ophs and #gthb
+   - added @memr and @sets attributes to $cmd
+   - added @invalid_version and @invalid_data to $err
+   - added @bs_sets, @bs_memr, @bs_ophs and @bs_gthb to $cmd
+   - added the possibility to see the path of VERSION_HISTORY.txt
+   - added more information on how the language files work in ~/langs/empty.lang
+   - added the command _ophs, to see the calculation history, '_ophs clear' to clear it
+   - added @bs_ophs to $cmd, @empty_ophs and @ophs_res to $msg and @ophs_res to @inp
+   - now, when using the '#path' command, the directory will be copied in the clipboard,
+     the same applies to '_vshs path'
+
+Changes:
+   - now all version files in ~/other/infos/versions have dots between numbers (1.0.2.1.txt)
+   - removed _open, replaced by '_memr open'
+   - removed _save, replaced by '_memr save'
+   - removed _smem, replaced by '_memr'
+   - removed _addm, replaced by '_memr add'
+   - removed _delm, replaced by '_memr del'
+   - removed #cmem, replaced by '_memr clear'
+   - removed _show, replaced by '_sets'
+   - removed _acal, replaced by '_sets acal'
+   - removed _expr, replaced by '_sets expr'
+   - removed _swap, replaced by '_sets swap'
+   - removed #rset, replaced by '_sets reset'
+   - removed _load, replaced by '_lang reload'
+   - changed command logic for _lang
+   - removed all references to the commands removed from the language files
+   - renamed ~/other/infos to ~/other/info
+   - all the version files in the ~/other/info/versions directory have been renamed to have dots
+     between numbers
+   - changed the messages of @help, @advanced_help, @info, @bs_vshs, @bs_lang
+   - now, divisions between polynomials/monomials that yield negative powers are supported
+   - improved divisions between polynomials and monomials
+   - improved monomial/polynomial calculation in general, less errors should occur
+   - changed the extension of a calculator file from .mem to .calc, .mem files are still supported
+     but to access them you have to put the filename directly on the path, when asked
+   - the output in the debug mode is easier to understand
+   - changed command #ltrl to _ltrl and moved into the @help_msg message
+   - renamed @info to @info_msg, @help to @help_mgs, @complex to @non_int_root_error, @ad_ltrl to @bs_ltrl
+   - changed message of @bs_ltrl
+   - changed the output when the debug mode is active, now shows the calculations, not the resultant lists
+
+Fixes:
+   - memory files can no longer be saved with an extension different from .calc
+   - less unexpected errors should occur
+   - now the 'X' multiplication operator in the @info message is uppercase
+   - now in the @info message the second to last line says '_help _help' instead of '_help help'
+   - you can no longer merge arguments with the command (es. _langen was equal to _lang en)
+   - it's now possible to save files in folder with spaces in the name but the path must be surrounded by
+     double quotes ("c:\users\[USERNAME]\Desktop\Random folder you probably have")
+   - now the single version files from 1.0.0.0.txt to 1.0.2.1.txt will have the new arrangement
+     for the changelog
+   - the calculator no longer crashes if the files in the settings folder are invalid, it will overwrite
+     them instead
+   - it's no longer possible calculate the root of a polynomial, before the result would be wrong
+   - fixed a bug that sometimes caused numbers to have a .0 ending in the literal mode
+   - fixed a bug that caused the parenthesis in the output string to sometimes not be displayed correctly
+   - now when the debug mode is active the output of the calculations is visible once again
+   - now a blank lines appears when the @non_int_root_error message is shown
+   - fixed a bug that caused two blank lined to appear when executing the command '_help _advn', now only
+     one appears
+   - fixed the @bs_lang message in the italian language not being consistent with the messages from other
+     languages
+   - now the command _vshs is listed in the @help_msg message
+   - fixed a bug that didn't save the last result of an expression when the output expression was disabled
+   - now a blank line appears after the number if the output expression is disabled
+   - now, when pressing 'Ctrl + C' to close the calculator, it is closed correctly
+   - now, in the EN.lang file, the attributes of the $msg set are properly separated by a blank line"
+   - it's now possible to re-assign a value in memory without having to delete it first
+
+Missed to declare in the last update:
+   - now the calclog.log file is split in info.log, debug.log and error.log; all in the calclog folder
+   - added a process_count.json file in the ~/settings directory, counts how many times the calculator has
+     been opened
+   - added lang files will now support special characters as long as they are encoded with the
+     ANSI encoding
+   - optimized calculation

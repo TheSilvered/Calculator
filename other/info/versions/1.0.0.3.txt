@@ -1,0 +1,11 @@
+
+Version 1.0.0.3
+######### Changelog #########
+
+Changes:
+   - file extension for 'settings' and 'acronym_lang' is now back to .json
+   - file extension for languages is now .lang instead of .lan
+   - now you must add parenthesis when using negatives numbers: 1 + -1 no longer works but 1 + (-1) does
+
+Fixes:
+   - program optimized with file management and invalid syntaxes

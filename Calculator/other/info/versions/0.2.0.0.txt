@@ -1,0 +1,5 @@
+
+Alpha 0.2.0.0
+Changelog:
+- fixed many crashes regarding the parenthesis
+- fixed many crashes occurring when inserting invalid numbers

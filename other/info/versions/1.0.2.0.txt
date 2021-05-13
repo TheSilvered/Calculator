@@ -1,0 +1,59 @@
+
+Version 1.0.2.0
+######### Changelog #########
+
+Additions:
+   - now is possible to calculate the root in the literal mode
+   - added support for undefined powers in the monomial calculation
+   - in the $err set the @inaccessible_mem and @other_error attributes have been added
+   - now the code is available on GitHub: https://github.com/TheSilvered/Calculator3
+
+Changes:
+   - now the letter 'x' is no longer considered an operator, but 'X' is
+   - now complex results are shown as coordinates in the complex plane
+   - you can no longer save files that contain inaccessible characters
+   - made the VERSION_HISTORY.txt file more accessible from versions 1.0.0.0 to the latest
+   - you can no longer save a number in memory if the key it is assigned to raises a UnicodeError
+     (activate #dbug mode to is when it occurs)
+   - you can no longer set an operator as the name of a value stored in memory
+   - now to get the help message of a command you have to put the command itself (Es. '_help #dbug')
+   - the following attributes have been renamed:
+     @acal  -> @bs_acal
+     @addm  -> @bs_addm
+     @advn  -> @bs_advn
+     @delm  -> @bs_delm
+     @exmp  -> @bs_exmp
+     @expr  -> @bs_expr
+     @help  -> @bs_help
+     @info  -> @bs_info
+     @lang  -> @bs_lang
+     @load  -> @bs_load
+     @open  -> @bs_open
+     @save  -> @bs_save
+     @show  -> @bs_show
+     @smem  -> @bs_smem
+     @stop  -> @bs_stop
+     @swap  -> @bs_swap
+     @vshs  -> @bs_vshs
+     @*cmem -> @ad_cmem
+     @*dbug -> @ad_dbug
+     @*exit -> @ad_exit
+     @*prth -> @ad_prth
+     @*rset -> @ad_rset
+     @*path -> @ad_path
+     @*ltrl -> @ad_ltrl
+   - changed command logic for '_help', now you have to insert the prefix of the command
+     (Es: _help #dbug, _help _open)
+   - updated @bs_help message
+   - now the calculator will no longer crash, instead will produce an error message describing the error
+
+Fixes:
+   - fixed a bug that caused ES.lang to not load properly
+   - fixed a bug that caused the first value of an expression when the @impossible_div_error appeared
+   - fixed a crash that could occur when using the '-' operator and the literal mode was enabled
+   - fixed several crashes that could occur when trying to divide in the literal mode
+   - fixed a bug that caused the negative numbers to be read incorrectly
+   - fixed a bug that caused the 'N(' and ')N' multiplications to remove the last cipher of the number
+   - fixed a crash that occurred when using the letter 'x' i a monomial/polynomial
+   - fixed a bug that caused a spam when an invalid attribute had multiple lines,
+     now only the first one is shown

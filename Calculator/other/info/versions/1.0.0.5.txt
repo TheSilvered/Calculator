@@ -1,0 +1,17 @@
+
+Version 1.0.0.5
+######### Changelog #########
+
+Additions:
+   - added command _save, to save the current memory cells
+   - added command _open, to open a saved memory file, with file extension .mem
+
+Changes:
+   - now adjacent opening and closing parenthesis are considered a multiplication Es. (1+1) (7-4) = 6
+   - .lang files are no longer line-dependent
+
+Fixes:
+   - now a blank line appears when resetting the settings
+   - fixed output where certain parenthesis would be messed up
+   - now when you type '(N)', with N being a number, not an expression, the output expression
+     shows (N) instead of (N

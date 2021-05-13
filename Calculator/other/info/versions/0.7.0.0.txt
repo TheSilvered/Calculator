@@ -1,0 +1,9 @@
+
+Beta 0.7.0.0
+Changelog:
+- added language support
+- added command _lang to change language
+- added command _load to reload the current language, useful when multiple instances are running at once
+- added Italian language
+- added Spanish language
+- added French language

@@ -1,0 +1,458 @@
+$msg
+::
+::
+::
+@info_msg
+
+Calculator by Davide Taffarello
+
+Operatori:
+'+' -> addizione
+'-' -> sottrazione
+'*' o 'X' -> moltiplicazione
+'/' o ':' -> divisione
+'^' -> potenza
+'%' -> resto della divisione
+'R' -> radice (2R -> radice quadrata, 3R -> radice cubica)
+
+Una virgola o un punto determinano l'inizio della parte non intera del numero: 1.1 = 1,1
+Con il comando '_acal' puoi decidere se accetta sia il sistema di scrittura inglese che
+quello internazionale o solamente quello in uso, '_help acal' per più informazioni sul comando.
+Gli operatori elencati sopra sono quelli disponibili, nel caso della divisione e della
+moltiplicazione sono accettati entrambi quelli elencati ma verrà mostrato il primo dei due.
+La calcolatrice dispone di un sistema di memoria, fai '_help _memr' per avere più informazioni.
+
+Una precisazione per quanto riguarda la radice:
+se si inserisce '2R 2R 16' il risultato non sarà 2 ma la radice 1,41421... di 16, per fare in
+modo che il risultato sia 2 vanno aggiunte le parentesi: 2R (2R 16).
+
+Inserisci '_help' per aprire la lista dei comandi, '_help _help' per maggiori informazioni
+sul comando.
+::
+@help_msg
+
+'_help' -> apre questa lista
+'_info' -> per avere informazioni sul programma
+'_exmp' -> per avere un esempio di espressione
+'_sets' -> mostra le impostazioni correnti
+'_memr' -> mostra cos'è salvato in memoria
+'_vshs' -> mostra le novità di tutte le versioni
+'_vshs news' -> mostra le novità dell'ultima versione
+'_advn' -> mostra i comandi avanzati
+
+'_sets swap' -> cambia tra sistema di scrittura inglese e quello internazionale
+'_sets expr' -> per mostrare o meno l'espressione nell'output
+'_sets acal' -> l'input verrà letto secondo il sistema di scrittura in uso o acetterà tutti i sistemi
+'_sets save' -> per salvere le impostazioni su un file
+'_sets open' -> per aprire un file dove sono state salvate le impostazioni
+'_sets reset' -> resetta le impostazioni
+
+'_lang' -> per cambiare la lingua
+'_lang reload' -> ricarica le lingue disponibili
+
+'_ophs' -> mostra la cronologia delle operazioni
+'_ophs clear' -> cancella la cronologia delle operazioni
+
+'_memr add' -> aggiunge un numero alla memoria
+'_memr del' -> rimuove un numero dalla memoria
+'_memr save' -> per salvare la memoria su un file
+'_memr open' -> per aprire un file dove è stata salvata la memoria
+'_memr clear' -> elimina tutto dalla memoria
+
+'_ltrl' -> attiva la modalità letterale
+
+'_stop' -> per fermare il programma
+
+
+I comandi non sono sensibili alle maiuscole
+::
+@advanced_help
+
+'#dbug' -> mostra il log di debug
+'#prth' -> ignora l'ordine delle parentesi
+'#exit' -> ferma istantaneamente il programma
+'#path' -> mostra la cartella in cui si trova l'eseguibile del programma
+'#gthb' -> mostra il link per il codice su github
+::
+@example
+
+Inserisci espressione:  # Questa linea appare sempre
+> 3R (3^2 + 18)         # Questo è quello che digiti
+3R (3 ^ 2 + 18) = 3     # Questo mostra quello che ha capito il programma e il risultato
+::
+@available_languages
+Lingue disponibili:
+::
+@added_to_mem
+&è stato aggiunto alla memoria
+::
+@deleted_from_mem
+&è stato cancellato dalla memoria
+::
+@empty_mem
+La memoria è vuota
+::
+@settings_res
+Le impostazioni sono state resettate
+::
+@mem_res
+La memoria è stata resettata
+::
+@lang_loaded
+La lingua è stata ricaricata
+::
+@file_saved
+&Il file è stato salvato in
+::
+@file_opened
+&è stato aperto con successo
+::
+@empty_ophs
+Cronologia operazioni vuota
+::
+@ophs_res
+Cronologia eliminata
+::
+::
+::
+$err
+::
+::
+::
+@syntax_error
+Sintassi non valida
+::
+@non_int_root_error
+Non si può calcolare una radice complessa o negativa
+::
+@file_not_found
+File non trovato
+::
+@invalid_command
+Comando non valido
+::
+@invalid_arg
+&Argomento non valido:
+::
+@permission_error
+Non hai il permesso di accedere a questa cartella
+::
+@no_num_name
+Non puoi usare un numero come nome del valore
+::
+@no_mem_cell
+La cella di memoria specificata non esiste
+::
+@invalid_answer
+La risposta non è valida
+::
+@no_such_cmd
+&Non esiste un comando chiamato
+::
+@no_such_lang
+La lingua inserita non è disponibile
+::
+@impossible_div_error
+In questo calcolo c'è una divisione impossiblie
+::
+@non_int_pow_error
+Non è possibile calcolare questa potenza
+::
+@name_error
+Non è stato possibile salvare il file
+Il nome specificato è riservato da Windows
+::
+@inaccessible_mem
+La memoria non è accessibile nella modalità letterale
+::
+@other_error
+&Un errore imprevisto si è verificato. Il tipo di errore è:
+::
+@invalid_version
+Versione non valida
+::
+@invalid_data
+Il file selezionato non è del tipo previsto
+::
+::
+::
+$inp
+::
+::
+::
+@expression
+Inserisci espressione:
+::
+@stop
+Sei sicuro di voler uscire dal programma? Rispondi: Y/N (Y = Sì, N = No)
+::
+@lang_acronym
+Scrivi l'acronimo della tua lingua:
+::
+@add_mem
+Inserisci il nome e il valore se va specificato:
+::
+@del_mem
+Inserisci il nome del valore da cancellare:
+::
+@mem_res
+Sei sicuro di voler cancellare tutta la memoria? Rispondi: Y/N (Y = Sì, N = No)
+::
+@settings_res
+Sei sicuro di voler resettare le impostazioni? Rispondi: Y/N (Y = Sì, N = No)
+::
+@save_path
+Inserisci il percorso della cartella dove vuoi salvare il file:
+::
+@open_path
+Inserisci il percorso della cartella dove si trova il file:
+::
+@file_name
+Inserisci il nome del file (non mettere .calc):
+::
+@ophs_res
+Sei sicuro di voler eliminare la cronologia? Rispondi: Y/N (Y = Sì, N = No)
+::
+::
+::
+$out
+::
+::
+::
+@debug_mode
+&Modalità debug
+::
+@ignore_prth
+&Ignora le parentesi
+::
+@us_uk_sys
+&Sistema di scrittura inglese
+::
+@output_string
+&Espressione di output
+::
+@accept_all
+&Accetta tutti i sistemi
+::
+@lang
+&Lingua corrente
+::
+@switch
+&ora è
+::
+@literal
+&Calcolo letterale
+::
+@operation_cancelled
+Operazione annullata
+::
+::
+::
+$lan
+::
+::
+::
+@infinity
+&Infinito
+::
+@true
+&Vero
+::
+@false
+&Falso
+::
+@undetermined
+&Indeterminato
+::
+@impossible
+&Impossibile
+::
+::
+::
+$cmd
+::
+::
+::
+@bs_advn
+Non ci sono ulteriori informazioni per questo comando.
+::
+@bs_exmp
+Non ci sono ulteriori informazioni per questo comando.
+::
+@bs_help
+
+Mostra tutti i comandi e le loro funzioni.
+Sintassi:
+> _help <command>
+
+command -> il comando di cui si cercano informazioni, compreso il prefisso
+
+Esempio:
+> _help #dbug
+> _help _save
+::
+@bs_info
+Non ci sono ulteriori informazioni per questo comando.
+::
+@bs_lang
+
+Con questo comando si cambia la lingua del programma.
+Sintassi:
+> _lang <language>
+> _lang reload
+
+<language> -> un parametro opzionale dove si può inserire l'acronimo della lingua
+reload -> ricarica la lingua
+
+Esempio:
+> _lang IT
+> 'Lingua corrente' ora è Italiano
+::
+@bs_stop
+Non ci sono ulteriori informazioni per questo comando.
+::
+@bs_vshs
+
+Mostra i cambiamenti di ogni versione
+
+Si può specificare una versione in particolare altrimenti verranno
+visualizzate tutte.
+
+Sintassi:
+> _vshs <version>
+> _vshs news
+> _vshs path
+
+<version> -> una versione di quelle elencate quando si fa il comando _vshs
+           senza specificarla
+news -> mostra le novità dell'ultima versione
+path -> mostra il percorso del file VERSION_HISTORY.txt
+::
+@ad_dbug
+
+Mostra il log di debug quando si esegue un calcolo e mostra
+un log parziale nel file calclog.log
+::
+@ad_exit
+Non ci sono ulteriori informazioni per questo comando.
+::
+@ad_prth
+Non ci sono ulteriori informazioni per questo comando.
+::
+@ad_path
+Non ci sono ulteriori informazioni per questo comando.
+::
+@bs_ltrl
+Attiva la modalità letterale.
+Essa supporta monomi e polinomi e le operazioni possibili sono:
+
+P -> Polinomio
+M -> Monomio
+
+M + M, P + M, P + P
+M - M, P - M, P - P
+M * M, P * M, P * P
+M / M, P / M
+MR M*
+M ^ M, P ^ M*
+
+* non è sempre possibile eseguire questa operazione
+::
+@bs_memr
+Questo comando gestisce la memoria, può aggiungere elementi, toglierli, salvarli in un file
+e aprire dei file precedentemente salvati.
+
+Sintassi:
+> _memr add <value_name*> <value*>
+> _memr del <value_name*>
+> _memr save <path*>
+> _memr open <path*> <overwrite: true/false*>
+
+*non è necessario inserire questo valore, ma se questo non viene inserito nemmeno
+ quelli seguenti non dovranno essere inseriti
+
+add -> aggiunge un valore alla memoria
+   - value_name -> nome del valore che sarà sostituito con il valore della memoria, non può
+     essere un numero
+   - value -> il valore assegnato a value_name, un numero
+
+del -> toglie un valore dalla memoria
+   - value_name -> il nome che è stato dato al valore da togliere
+
+save -> salva un file di memoria
+   - path -> è il percorso della cartella dove si trova il file, si può aggiungere il nome del file
+             alla file separato da uno slash (\) al resto del percorso. Nel caso contenga spazio può essere
+             circondato dalle virgolette (").
+
+open -> apre un file di memoria
+   - path -> è il percorso della cartella dove si trova il file, si può aggiungere il nome del file
+             alla file separato da uno slash (\) al resto del percorso. Nel caso contenga spazio può essere
+             circondato dalle virgolette (").
+   - overwrite -> messo a 'true' sostituisce la memoria importata, a 'false' sostituisce i valori con
+                  nome uguale e aggiunge quelli che non sono in memoria, non cancella niente.
+                  Se il valore non è specificato sarà 'false' di default
+
+Es:
+> _memr add pi 3,14
+> _memr del pi
+> _memr save "C:\Users\[USERNAME]\Desktop\calc memory\pi.calc"
+> _memr open "C:\Users\[USERNAME]\Desktop\calc memory\pi.calc" true
+
+::
+@bs_sets
+Cambia alcune delle impostazioni della calcolatrice.
+
+Sintassi:
+> _sets <set>
+> _sets reset
+> _sets save <path*>
+> _sets open <path*>
+
+*non è necessario inserire questo valore, ma se questo non viene inserito nemmeno
+ quelli seguenti non dovranno essere inseriti
+
+set -> il nome di un'impostazione (expr, acal, swap)
+   - expr -> per mostrare o meno l'espressione nell'output
+
+   - acal -> Cambia tra la modalità 'accetta tutti i sisemi' e 'accetta il sistema corrente'
+
+			 Per riconscere tutti i sistemi lavora in questo modo:
+			 - Controlla il numero di punti e virgole
+			 - Se ci sono più punti e/o virgole li/e ignora
+			 - Nel caso ci siano un sono punto e una sola virgola ignora quello che viene prima
+
+			 Esempio:
+			 > 1.658.156,488 -> 2 punti, una virgola: ignora i punti -> 1658156,488
+			 > 12.189,14 -> un punto, una virgola: non ignora niente -> il punto viene prima: ignora il punto -> 12189,14
+			 > 1.000 -> un punto, 0 virgole: non ignora niente -> 1,0
+
+			 Nel caso accetti solo il sistema corrente:
+			 Se il sistema corrente è inglese ignora le virgole
+			 Se il sistema corrente è internazionale ignora i punti
+
+   - swap -> Cambia cutout tra il sistema di scittura inglese e quello internazionale
+
+             Nel sistema internazionale vengono usati i punti per le migliaia e la virgola
+             per la parte decimale.
+
+             Nel sistema inglese vengono usate le virgole per le migliaia e il punto per
+             la parte decimale.
+
+reset -> resetta le impostazioni ad eccezione della lingua
+
+save -> salva un file delle impostazioni
+   - path -> è il percorso della cartella dove si trova il file, si può aggiungere il nome del file
+             alla file separato da uno slash (\) al resto del percorso. Nel caso contenga spazio può essere
+             circondato dalle virgolette (").
+
+open -> apre un file delle impostazioni
+   - path -> è il percorso della cartella dove si trova il file, si può aggiungere il nome del file
+             alla file separato da uno slash (\) al resto del percorso. Nel caso contenga spazio può essere
+             circondato dalle virgolette (").
+::
+@bs_ophs
+Non ci sono ulteriori informazioni per questo comando.
+::
+@ad_gthb
+Non ci sono ulteriori informazioni per questo comando.
+::

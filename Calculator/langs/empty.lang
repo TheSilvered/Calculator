@@ -1,0 +1,349 @@
+:: This is a comment
+:: Everything on this line will be ignored
+:: every line starting with '@' is an attribute to the set of the message
+:: every line starting with '$' indicates the set to which the attribute resembles to
+:: if a line starts with '&', the automatic return will be ignored
+::
+:: do not leave blank lines or lines that start with & after declaring the set but not the attribute
+:: the order of the attributes and of the sets is arbitrary
+::
+:: you can declare an attribute twice and only the second declaration will will be saved
+:: you can repeat a set and all the attributes after the declaration of the set will resemble to it
+::
+:: Ex:
+:: $mgs
+:: @help
+:: this resembles to $msg
+::
+:: $cmd
+:: bs_help
+:: this resembles to $cmd
+::
+:: $msg
+:: this resembles to $msg too
+::
+::
+::
+:: ============!!WARNING!!============
+:: If an attribute has an invalid name, the calculator will not be able to load the language correctly
+:: But if it happens, the calculator will tell you the line and the wrong attribute
+::
+::
+::
+$msg
+::
+::
+::
+:: This attribute is called when using the '_info' command
+@info_msg
+
+::
+:: This attribute is called when using the '_help' command
+@help_msg
+
+::
+:: This attribute is called when using the '_advn' command
+@advanced_help
+
+::
+:: This attribute is called when using the '_exmp' command
+@example
+
+::
+:: This attribute is called when using the '_lang' command without any arguments
+@available_languages
+
+::
+:: This attribute is called when using the '_memr add' command
+:: and the value is added successfully
+@added_to_mem
+&
+::
+:: This attribute is called when using the '_memr del 'command
+:: and the value is removed successfully
+@deleted_from_mem
+&
+::
+:: This attribute is called when using the '_memr' command and there is nothing in
+:: the memory to show
+@empty_mem
+
+::
+:: This attribute is called when using the '_sets reset' command and the answer is positive
+@settings_res
+
+::
+:: This attribute is called when using the '_memr clear' command and the answer is positive
+@mem_res
+
+::
+:: This attribute is called when using the '_lang reload' command
+@lang_loaded
+
+::
+:: This attribute is called when a file is saved successfully
+@file_saved
+&
+::
+:: This attribute is called when a file is opened successfully
+@file_opened
+&
+::
+:: This attribute is called when using the '_ophs' command and there is nothing to show
+@empty_ophs
+
+::
+:: This attribute is called when using the '_ophs clear' command and the answer is positive
+@ophs_res
+
+::
+::
+::
+$err
+::
+::
+::
+:: This attribute is called when the calculator receives an invalid expression
+@syntax_error
+
+::
+:: This attribute is called when you try to calculate a power that's not an integer and
+:: the literal mode is activated
+@non_int_root_error
+
+::
+:: This attribute is called when a file you are trying to open doesn't exist in that directory
+@file_not_found
+
+::
+:: This attribute is called when you execute a command that's not valid
+@invalid_command
+
+::
+:: This attribute is called when you execute a command and one of the arguments passed is not valid
+@invalid_arg
+&
+::
+:: This attribute is called when you try to open a file from a directory that the account to which
+:: the calculator is linked to doesn't have access to
+@permission_error
+
+::
+:: This attribute is called when trying to use a number as the name of a value to store in memory
+@no_num_name
+
+::
+:: This attribute is called when trying to delete a number from the memory and the name of the
+:: value given doesn't exist
+@no_mem_cell
+
+::
+:: This attribute is called when something asks for a confirmation and you don't input either 'y' or 'n'
+@invalid_answer
+
+::
+:: This attribute is called when using the '_help <command>' command and the command given doesn't exist
+@no_such_cmd
+&
+::
+:: This attribute is called when using the '_lang <language>' command and the language acronym is not
+:: supported by the calculator
+@no_such_lang
+
+::
+:: This attribute is called when a division in the literal mode is impossible
+@impossible_div_error
+&
+::
+:: This attribute is called when a power in the literal mode is impossible
+@non_int_pow_error
+&
+::
+:: This attribute is called when the name of the file that you're trying to save is reserved by windows
+:: such as: CON, AUX, LPT1-9, ...
+@name_error
+
+::
+:: This attribute is called when you try to access the memory but you are in the literal mode
+@inaccessible_mem
+
+::
+:: This attribute is called when an unexpected error occurs
+@other_error
+&
+::
+:: This attribute is called when using the '_vshs <version>' command and the version given doesn't exist
+@invalid_version
+
+::
+:: This attribute is called when the file you try to open is not a .calc file or, if it's a settings file,
+:: there are not all settings
+@invalid_data
+
+::
+::
+::
+$inp
+::
+::
+::
+:: This attribute is called every time the calculator asks for an input that's not part of a command
+@expression
+
+::
+:: This attribute is called when using the '_stop' command
+@stop
+
+::
+:: This attribute is called before showing the acronyms of the available languages
+@lang_acronym
+
+::
+:: This attribute is called when using the '_memr add' command without giving any extra arguments
+@add_mem
+
+::
+:: This attribute is called when using the '_memr del' command without giving any extra arguments
+@del_mem
+
+::
+:: This attribute is called when using the '_memr clear' command
+@mem_res
+
+::
+:: This attribute is called when using the '_sets reset' command
+@settings_res
+
+::
+:: This attribute is called when saving a file without putting the path in the command
+@save_path
+
+::
+:: This attribute is called when opening a file without putting the path in the command
+@open_path
+
+::
+:: This attribute is called when saving or opening a file without putting the name of
+:: the file directly in the path
+@file_name
+
+::
+:: This attribute is called when using the '_ophs clear' command
+@ophs_res
+
+::
+::
+::
+$out
+::
+::
+::
+:: These are the name of the settings and the feedbacks of the commands
+@debug_mode
+&
+::
+@ignore_prth
+&
+::
+@us_uk_sys
+&
+::
+@output_string
+&
+::
+@accept_all
+&
+::
+@lang
+&
+::
+@switch
+&
+::
+@literal
+&
+::
+@operation_cancelled
+
+::
+::
+::
+$lan
+::
+::
+::
+:: This attribute is called when a number is too big to deal with
+@infinity
+&
+::
+:: This attribute is called when a setting is changed
+@true
+&
+::
+:: This attribute is called when a setting is changed
+@false
+&
+::
+:: This attribute is called when the result is undetermined (only when trying to do 0 / 0)
+@undetermined
+&
+::
+:: This attribute is called when trying to divide by zero
+@impossible
+&
+::
+::
+::
+$cmd
+::
+::
+::
+:: These attributes are called when using the '_help <command>' command
+@bs_advn
+
+::
+@bs_exmp
+
+::
+@bs_help
+
+::
+@bs_info
+
+::
+@bs_lang
+
+::
+@bs_stop
+
+::
+@bs_vshs
+
+::
+@ad_dbug
+
+::
+@ad_exit
+
+::
+@ad_prth
+
+::
+@ad_path
+
+::
+@bs_ltrl
+
+::
+@bs_memr
+
+::
+@bs_sets
+
+::
+@bs_ophs
+
+::
+@ad_gthb
+
+::

@@ -1,0 +1,10 @@
+
+Version 1.0.0.0
+######### Changelog #########
+
+Changes:
+   - tweaked number fixing so that now 1,9999 does not become 2 and 1,00001 does not become 1
+   - changed exponential output, now works accordingly to the system in use
+
+Fixes:
+   - now the .0 or ,0 at the end of a whole doesn't appear once again

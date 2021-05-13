@@ -1,0 +1,458 @@
+$msg
+::
+::
+::
+@info_msg
+
+Calculatrice par Davide Taffarello
+
+Les opérateurs:
+'+' -> ajout
+'-' -> soustraction
+'*' ou 'X' -> multiplication
+'/' ou ':' -> division
+'^' -> puissance
+'%' -> reste de la division
+'R' -> racine (2R -> racine carrée, 3R -> racine cubique)
+
+Une virgule ou un point détermine le début de la partie non entière du nombre: 1.1 = 1,1
+Avec la commande '_acal', vous pouvez décider s'il accepte à la fois le système d'écriture anglais et
+l'international ou simplement celui utilisé, '_help acal' pour plus d'informations sur la commande.
+Les opérateurs listés ci-dessus sont ceux disponibles, en cas de division et
+multiplication les deux listés sont acceptés mais le premier des deux sera affiché.
+La calculatrice a un système de mémoire, faites '_help _memr' pour plus d'informations.
+
+Une clarification concerned la racine:
+si vous entrez '2R 2R 16' le résultat ne sera pas 2 mais la racine 1.41421... de 16, à faire en
+pour que le résultat soit 2, les crochets doivent être ajoutés: 2R (2R 16) = 2.
+
+Entrez '_help' pour ouvrir la liste des commandes, '_help _help' pour plus d'informations
+sur commande.
+::
+@help_msg
+
+'_help' -> ouvre cette liste
+'_info' -> pour obtenir des informations sur le programme
+'_exmp' -> pour obtenir un exemple d'expression
+'_sets' -> affiche les paramètres actuels
+'_memr' -> montre ce qui est sauvegardé en mémoire
+'_vshs' -> affiche les actualités de toutes les versions
+'_vshs news' -> affiche les actualités de la dernière version
+'_advn' -> affiche les commandes avancées
+
+'_sets swap' -> bascule entre les systèmes d'écriture anglais et internationaux
+'_sets expr' -> pour afficher ou non l'expression dans la sortie
+'_sets acal' -> l'entrée sera lue selon le système d'écriture utilisé ou acceptera tous les systèmes
+'_sets save' -> pour enregistrer les paramètres dans un fichier
+'_sets open' -> pour ouvrir un fichier dans lequel les paramètres ont été enregistrés
+'_sets reset' -> réinitialiser les paramètres
+
+'_lang' -> pour changer la langue
+'_lang reload' -> recharger les langues disponibles
+
+'_ophs' -> montre l'historique des opérations
+'_ophs clear' -> efface l'historique des opérations
+
+'_memr add' -> ajoute un nombre à la mémoire
+'_memr del' -> supprime un nombre de la mémoire
+'_memr save' -> pour enregistrer la mémoire dans un fichier
+'_memr open' -> pour ouvrir un fichier où la mémoire a été sauvegardée
+'_memr clear' -> efface tout de la mémoire
+
+'_ltrl' -> active le mode littéral
+
+'_stop' -> pour arrêter le programme
+
+
+Les commandes ne sont pas sensibles à la casse
+::
+@advanced_help
+
+'#dbug' -> affiche le journal de débogage
+'#prth' -> ignore l'ordre des crochets
+'#exit' -> arrête le programme instantanément
+'#path' -> montre le dossier où se trouve l'exécutable du programme
+'#gthb' -> afficher le lien pour le code sur github
+::
+@example
+
+Insérer une expression: # Cette ligne apparaît toujours
+> 3R (3^2 + 18)         # C'est ce que vous tapez
+3R (3 ^ 2 + 18) = 3     # Ceci montre ce que le programme a compris et le résultat
+::
+@available_languages
+Langues disponibles:
+::
+@added_to_mem
+&a été ajouté à la mémoire
+::
+@deleted_from_mem
+&a été effacé de la mémoire
+::
+@empty_mem
+La mémoire est vide
+::
+@settings_res
+Les paramètres ont été réinitialisés
+::
+@mem_res
+La mémoire a été réinitialisée
+::
+@lang_loaded
+La langue a été rechargée
+::
+@file_saved
+Le fichier a été enregistré dans
+::
+@file_opened
+&a été ouvert avec succès
+::
+@empty_ophs
+Historique des opérations vierge
+::
+@ophs_res
+Historique supprimé
+::
+::
+::
+$err
+::
+::
+::
+@syntax_error
+Syntaxe invalide
+::
+@non_int_root_error
+Une racine complexe ou négative ne peut pas être calculée
+::
+@file_not_found
+Fichier introuvable
+::
+@invalid_command
+Commande non valide
+::
+@invalid_arg
+&Argument invalide:
+::
+@permission_error
+Vous n'êtes pas autorisé à accéder à ce dossier
+::
+@no_num_name
+Vous ne pouvez pas utiliser un nombre comme nom de la valeur
+::
+@no_mem_cell
+La cellule mémoire spécifiée n'existe pas
+::
+@invalid_answer
+La réponse est invalide
+::
+@no_such_cmd
+&Il n'y a pas de commande appelée
+::
+@no_such_lang
+La langue saisie n'est pas disponible
+::
+@impossible_div_error
+Dans ce calcul, il y a une division impossible
+::
+@non_int_pow_error
+Il n'est pas possible de calculer cette puissance
+::
+@name_error
+Le fichier n'a pas pu être enregistré
+Le nom spécifié est réservé par Windows
+::
+@inaccessible_mem
+La mémoire n'est pas accessible en mode littéral
+::
+@other_error
+&Une erreur inattendue est survenue. Le type d'erreur est:
+::
+@invalid_version
+Version invalide
+::
+@invalid_data
+Le fichier sélectionné n'est pas du type attendu
+::
+::
+::
+$inp
+::
+::
+::
+@expression
+Entrez l'expression:
+::
+@stop
+Voulez-vous vraiment quitter le programme? Répondre: Y/N (Y = Oui, N = Non)
+::
+@lang_acronym
+Écrivez liaison de votre langue:
+::
+@add_mem
+Entrez le nom et la valeur s'il doit être spécifié:
+::
+@del_mem
+Saisissez le nom de la valeur à supprimer:
+::
+@mem_res
+Voulez-vous vraiment effacer toute la mémoire? Répondre: Y/N (Y = Oui, N = Non)
+::
+@settings_res
+Voulez-vous vraiment réinitialiser les paramètres? Répondre: Y/N (Y = Oui, N = Non)
+::
+@save_path
+Entrez le chemin du dossier dans lequel vous souhaitez enregistrer le fichier:
+::
+@open_path
+Entrez le chemin d'accès au dossier où se trouve le fichier:
+::
+@file_name
+Entrez le nom du fichier (ne pas ajouter .mem):
+::
+@ophs_res
+Voulez-vous vraiment supprimer l'historique? Répondre: Y/N (Y = Oui, N = Non)
+::
+::
+::
+$out
+::
+::
+::
+@debug_mode
+&Mode débogage
+::
+@ignore_prth
+&Ignorez les parenthèses
+::
+@us_uk_sys
+&Système d'écriture anglais
+::
+@output_string
+&Expression de sortie
+::
+@accept_all
+&Acceptez tous les systèmes
+::
+@lang
+&Langue courante
+::
+@switch
+&maintenant c'est
+::
+@literal
+&Calcul littéral
+::
+@operation_cancelled
+Opération annulée
+::
+::
+::
+$lan
+::
+::
+::
+@infinity
+&Infini
+::
+@true
+&Vrai
+::
+@false
+&Faux
+::
+@undetermined
+&Indéterminé
+::
+@impossible
+&Impossible
+::
+::
+::
+$cmd
+::
+::
+::
+@bs_advn
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@bs_exmp
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@bs_help
+
+Affiche toutes les commandes et leurs fonctions.
+Syntaxe:
+> _help <commande>
+
+commande -> la commande sur laquelle vous recherchez des informations, compreso il prefisso
+
+Exemple:
+> _help #dbug
+> _help _save
+::
+@bs_info
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@bs_lang
+
+Avec cette commande, vous changez la langue du programme.
+Syntaxe:
+> _lang <language>
+> _lang reload
+
+<language> -> un paramètre optionally où vous pouvez saisir l'acronyme de la langue
+reload -> recharge la langue
+
+Exemple:
+> _lang FR
+> 'Langue courante' maintenant c'est Français
+::
+@bs_stop
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@bs_vshs
+
+Afficher les changements de chaque version
+
+Vous pouvez spécifier une version particulière sinon ils viendront
+Voir tout.
+
+Syntaxe:
+> _vshs <version>
+> _vshs news
+> _vshs path
+
+<version> -> une version de ceux répertoriés lors de l'exécution de la commande _vshs
+            sans le préciser
+news -> affiche les actualités de la dernière version
+path -> montre le chemin du fichier VERSION_HISTORY.txt
+::
+@ad_dbug
+
+Afficher le journal de débogage lors de l'exécution d'un calcul et affiche
+un journal partiel dans le fichier calclog.log.
+::
+@ad_exit
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@ad_prth
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@ad_path
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@bs_ltrl
+Activez le mode littéral.
+Il prend en charge les monômes et les polynômes et les opérations possibles sont:
+
+P -> Polynôme
+M -> Mononomie
+
+M + M, P + M, P + P
+M - M, P - M, P - P
+M * M, P * M, P * P
+M / M, P / M
+MR M*
+M ^ M, P ^ M*
+
+* ce n'est pas toujours possible faire cette opération
+::
+@bs_memr
+Cette commande gère la mémoire, elle peut ajouter des éléments, les supprimer, les enregistrer dans un fichier
+et ouvrez les fichiers précédemment enregistrés.
+
+Syntaxe:
+> _memr add <value_name*> <value*>
+> _memr del <value_name*>
+> _memr save <path*>
+> _memr open <path*> <overwrite: true/false*>
+
+* il n'est pas nécessaire de saisir cette valeur, mais si elle n'est pas saisie non plus
+ les suivants ne doivent pas être insérés
+
+add -> ajoute une valeur à la mémoire
+   - nom_valeur -> nom de la valeur qui sera remplacée par la valeur mémoire, impossible
+     être un nombre
+   - valeur -> la valeur affectée à nom_valeur, un nombre
+
+del -> supprime une valeur de la mémoire
+   - value_name -> le nom donné à la valeur à supprimer
+
+save -> enregistrer un fichier mémoire
+   - path -> est le chemin du dossier où se trouve le fichier, vous pouvez ajouter le nom du fichier
+             vers le fichier séparé par une barre oblique (\) vers le reste du chemin. S'il contient de l'espace, il peut être
+             entouré de guillemets (").
+
+open -> ouvre un fichier mémoire
+   - path -> est le chemin du dossier où se trouve le fichier, vous pouvez ajouter le nom du fichier
+             vers le fichier séparé par une barre oblique (\) vers le reste du chemin. S'il contient de l'espace, il peut être
+             entouré de guillemets (").
+   - overwrite -> set to 'true' remplace la mémoire importée, à 'false' remplace les valeurs par
+                  même nom et ajoute ceux qui ne sont pas en mémoire, ne supprime rien.
+                  Si la valeur n'est pas spécifiée, elle sera 'false' par défaut
+
+Ex:
+> _memr add pi 3.14
+> _memr del pi
+> _memr save "C:\Users\[USERNAME]\Desktop\calc memory\pi.calc"
+> _memr open "C:\Users\[USERNAME]\Desktop\calc memory\pi.calc" true
+
+::
+@bs_sets
+Modifiez certains paramètres de la calculatrice.
+
+Syntaxe:
+> _sets <set>
+> _sets reset
+> _sets save <path*>
+> _sets open <path*>
+
+* il n'est pas nécessaire de saisir cette valeur, mais si elle n'est pas saisie non plus
+ les suivants ne doivent pas être insérés
+
+set -> le nom d'un paramètre (expr, acal, swap)
+   - expr -> pour afficher ou non l'expression dans la sortie
+
+   - acal -> Basculer entre 'accepter tous les systèmes' et 'accepter le système actuel'
+
+             Pour reconnaître tous les systèmes, cela fonctionne comme ceci:
+             - Vérifiez le nombre de points et de virgules
+             - S'il y a plus de points et / ou de virgules, ignorez-les / e
+             - S'il y a un point et une seule virgule, ignorez celui qui vient en premier
+
+             Exemple:
+             > 1.658.156,488 -> 2 points, une virgule: ignorer les points -> 1658156,488
+             > 12.189,14 -> un point, une virgule: n'ignore rien -> le point vient en premier: ignore le point -> 12189,14
+             > 1.000 -> un point, 0 virgule: n'ignore rien -> 1,0
+
+             Si vous n'acceptez que le système actuel:
+             Si le système actuel est anglais, ignorez les virgules
+             Si le système actuel est international, ignorez les points
+
+   - swap -> Changement de coupe entre le système d'écriture anglais et international
+
+             Dans le système international, des points pour des milliers et des virgules sont utilisés
+             pour la partie décimale.
+
+             Dans le système anglais, les virgules sont utilisées pour des milliers et un point pour
+             la partie décimale.
+
+reset -> réinitialiser les paramètres sauf la langue
+
+save -> enregistrer un fichier de paramètres
+   - path -> est le chemin du dossier où se trouve le fichier, vous pouvez ajouter le nom du fichier
+             vers le fichier séparé par une barre oblique (\) vers le reste du chemin. S'il contient de l'espace, il peut être
+             entouré de guillemets (").
+
+open -> ouvre un fichier de paramètres
+   - path -> est le chemin du dossier où se trouve le fichier, vous pouvez ajouter le nom du fichier
+             vers le fichier séparé par une barre oblique (\) vers le reste du chemin. S'il contient de l'espace, il peut être
+             entouré de guillemets (").
+::
+@bs_ophs
+Il n'y a aucune information supplémentaire pour cette commande.
+::
+@ad_gthb
+Il n'y a aucune information supplémentaire pour cette commande.
+::

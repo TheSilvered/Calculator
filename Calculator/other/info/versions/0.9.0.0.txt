@@ -1,0 +1,6 @@
+
+Beta 0.9.0.0
+Changelog:
+- added memory
+- added command _amem to add a number to memory
+- added command _dmem to delete a number from memory

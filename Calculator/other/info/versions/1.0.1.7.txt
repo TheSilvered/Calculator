@@ -1,0 +1,19 @@
+
+Version 1.0.1.7
+######### Changelog #########
+
+Additions:
+   - added support for the power in the literal mode
+
+Changes:
+   - changed message for '_help *ltrl'
+
+Fixes:
+   - fixed a bug that displayed the wrong state of the Literal Mode when using the command _show
+   - fixed a bug that caused numbers in the literal mode to be read incorrectly if next to parenthesis
+   - fixed the @impossible_div_error attribute in the .lang files (except for empty.lang)
+   - fixed the @non_int_pow_error in IT.lang that was in Spanish
+   - fixed a bug that caused negative monomials to be read incorrectly
+   - fixed a bug that caused expressions ending with a closing parenthesis to be considered invalid inputs
+   - fixed a bug that prevented you to input negative monomials
+   - fixed a crash that occurred when inputting a character not supported by the UTF-8 encoding

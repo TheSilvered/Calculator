@@ -1,0 +1,13 @@
+
+Version 1.0.0.7
+######### Changelog #########
+
+Additions:
+   - added _vshs command to show the VERSION_HISTORY.txt file
+   - added Monomial class, not yet accessible
+
+Changes:
+   - now the .lang files are in the 'languages' directory
+   - now 'settings.json' and 'acronym_lang.json' are in the 'settings' directory
+   - now the commands _amem, _dmem and _seem work once again, along the new ones
+   - further optimization on long calculations

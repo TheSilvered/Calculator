@@ -1,0 +1,8 @@
+
+Beta 0.9.0.1
+Changelog:
+- added the command #cmem to clear all the memory
+- command _amem renamed to _addm
+- command _dmem renamed to _delm
+- command #inst renamed to #exit
+- command _rset renamed to #rset, now visible trough the _advn command

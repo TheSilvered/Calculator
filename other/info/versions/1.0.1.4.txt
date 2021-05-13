@@ -1,0 +1,22 @@
+
+Version 1.0.1.4
+######### Changelog #########
+
+Additions:
+   - added command #path
+   - added the attribute @*path in the $cmd set
+   - added the following attributes to the set $msg:
+     @lang_loaded
+     @file_saved
+     @file_opened
+Changes:
+   - changed command logic for _open, '_help open' for more info
+   - renamed the attribute @num_in_mem to @no_num_name
+
+Fixes:
+   - now, the command #cmem no longer makes the program crash
+   - now the _seem command is considered valid once again
+   - the calculation respects once again the operation order
+   - now the attribute @mem_res under the $msg set is actually used
+   - now if an attribute in a .lang file is not valid, the program will continue
+     loading it instead of not loading anything after the non-valid attribute

@@ -1,0 +1,15 @@
+
+Version 1.0.1.1
+######### Changelog #########
+
+Additions:
+   - added more error output messages
+
+Changes:
+   - you can no longer set a number as a memory cell name
+   - 'languages' directory renamed to 'langs'
+   - it's no longer possible to store memory files without specifying a path
+
+Fixes:
+   - now the results that comprehend a complex number show properly
+   - now the numbers in the output string are always fixed

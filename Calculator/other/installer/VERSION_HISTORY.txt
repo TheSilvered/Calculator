@@ -1,0 +1,549 @@
+VERSION HISTORY
+
+===============
+Version 1.0.2.1 *NEW*
+######### Changelog #########
+Additions:
+   - added commands _memr, _sets, _ophs and #gthb
+   - added @memr and @sets attributes to $cmd
+   - added @invalid_version and @invalid_data to $err
+   - added @bs_sets, @bs_memr, @bs_ophs and @bs_gthb to $cmd
+   - added the possibility to see the path of VERSION_HISTORY.txt
+   - added more information on how the language files work in ~/langs/empty.lang
+   - added the command _ophs, to see the calculation history, '_ophs clear' to clear it
+   - added @bs_ophs to $cmd, @empty_ophs and @ophs_res to $msg and @ophs_res to @inp
+   - now, when using the '#path' command, the directory will be copied in the clipboard,
+     the same applies to '_vshs path'
+
+Changes:
+   - now all version files in ~/other/infos/versions have dots between numbers (1.0.2.1.txt)
+   - removed _open, replaced by '_memr open'
+   - removed _save, replaced by '_memr save'
+   - removed _smem, replaced by '_memr'
+   - removed _addm, replaced by '_memr add'
+   - removed _delm, replaced by '_memr del'
+   - removed #cmem, replaced by '_memr clear'
+   - removed _show, replaced by '_sets'
+   - removed _acal, replaced by '_sets acal'
+   - removed _expr, replaced by '_sets expr'
+   - removed _swap, replaced by '_sets swap'
+   - removed #rset, replaced by '_sets reset'
+   - removed _load, replaced by '_lang reload'
+   - changed command logic for _lang
+   - removed all references to the commands removed from the language files
+   - renamed ~/other/infos to ~/other/info
+   - all the version files in the ~/other/info/versions directory have been renamed to have dots
+     between numbers
+   - changed the messages of @help, @advanced_help, @info, @bs_vshs, @bs_lang
+   - now, divisions between polynomials/monomials that yield negative powers are supported
+   - improved divisions between polynomials and monomials
+   - improved monomial/polynomial calculation in general, less errors should occur
+   - changed the extension of a calculator file from .mem to .calc, .mem files are still supported
+     but to access them you have to put the filename directly on the path, when asked
+   - the output in the debug mode is easier to understand
+   - changed command #ltrl to _ltrl and moved into the @help_msg message
+   - renamed @info to @info_msg, @help to @help_mgs, @complex to @non_int_root_error, @ad_ltrl to @bs_ltrl
+   - changed message of @bs_ltrl
+   - changed the output when the debug mode is active, now shows the calculations, not the resultant lists
+
+Fixes:
+   - memory files can no longer be saved with an extension different from .calc
+   - less unexpected errors should occur
+   - now the 'X' multiplication operator in the @info message is uppercase
+   - now in the @info message the second to last line says '_help _help' instead of '_help help'
+   - you can no longer merge arguments with the command (es. _langen was equal to _lang en)
+   - it's now possible to save files in folder with spaces in the name but the path must be surrounded by
+     double quotes ("c:\users\[USERNAME]\Desktop\Random folder you probably have")
+   - now the single version files from 1.0.0.0.txt to 1.0.2.1.txt will have the new arrangement
+     for the changelog
+   - the calculator no longer crashes if the files in the settings folder are invalid, it will overwrite
+     them instead
+   - it's no longer possible calculate the root of a polynomial, before the result would be wrong
+   - fixed a bug that sometimes caused numbers to have a .0 ending in the literal mode
+   - fixed a bug that caused the parenthesis in the output string to sometimes not be displayed correctly
+   - now when the debug mode is active the output of the calculations is visible once again
+   - now a blank lines appears when the @non_int_root_error message is shown
+   - fixed a bug that caused two blank lined to appear when executing the command '_help _advn', now only
+     one appears
+   - fixed the @bs_lang message in the italian language not being consistent with the messages from other
+     languages
+   - now the command _vshs is listed in the @help_msg message
+   - fixed a bug that didn't save the last result of an expression when the output expression was disabled
+   - now a blank line appears after the number if the output expression is disabled
+   - now, when pressing 'Ctrl + C' to close the calculator, it is closed correctly
+   - now, in the EN.lang file, the attributes of the $msg set are properly separated by a blank line"
+   - it's now possible to re-assign a value in memory without having to delete it first
+
+Missed to declare in the last update:
+   - now the calclog.log file is split in info.log, debug.log and error.log; all in the calclog folder
+   - added a process_count.json file in the ~/settings directory, counts how many times the calculator has
+     been opened
+   - added lang files will now support special characters as long as they are encoded with the
+     ANSI encoding
+   - optimized calculation
+
+
+
+
+Version 1.0.2.0
+######### Changelog #########
+
+Additions:
+   - now is possible to calculate the root in the literal mode
+   - added support for undefined powers in the monomial calculation
+   - in the $err set the @inaccessible_mem and @other_error attributes have been added
+   - now the code is available on GitHub: https://github.com/TheSilvered/Calculator3
+
+Changes:
+   - now the letter 'x' is no longer considered an operator, but 'X' is
+   - now complex results are shown as coordinates in the complex plane
+   - you can no longer save files that contain inaccessible characters
+   - made the VERSION_HISTORY.txt file more accessible from versions 1.0.0.0 to the latest
+   - you can no longer save a number in memory if the key it is assigned to raises a UnicodeError
+     (activate #dbug mode to is when it occurs)
+   - you can no longer set an operator as the name of a value stored in memory
+   - now to get the help message of a command you have to put the command itself (Es. '_help #dbug')
+   - the following attributes have been renamed:
+     @acal  -> @bs_acal
+     @addm  -> @bs_addm
+     @advn  -> @bs_advn
+     @delm  -> @bs_delm
+     @exmp  -> @bs_exmp
+     @expr  -> @bs_expr
+     @help  -> @bs_help
+     @info  -> @bs_info
+     @lang  -> @bs_lang
+     @load  -> @bs_load
+     @open  -> @bs_open
+     @save  -> @bs_save
+     @show  -> @bs_show
+     @smem  -> @bs_smem
+     @stop  -> @bs_stop
+     @swap  -> @bs_swap
+     @vshs  -> @bs_vshs
+     @*cmem -> @ad_cmem
+     @*dbug -> @ad_dbug
+     @*exit -> @ad_exit
+     @*prth -> @ad_prth
+     @*rset -> @ad_rset
+     @*path -> @ad_path
+     @*ltrl -> @ad_ltrl
+   - changed command logic for '_help', now you have to insert the prefix of the command
+     (Es: _help #dbug, _help _open)
+   - updated @bs_help message
+   - now the calculator will no longer crash, instead will produce an error message describing the error
+
+Fixes:
+   - fixed a bug that caused ES.lang to not load properly
+   - fixed a bug that caused the first value of an expression when the @impossible_div_error appeared
+   - fixed a crash that could occur when using the '-' operator and the literal mode was enabled
+   - fixed several crashes that could occur when trying to divide in the literal mode
+   - fixed a bug that caused the negative numbers to be read incorrectly
+   - fixed a bug that caused the 'N(' and ')N' multiplications to remove the last cipher of the number
+   - fixed a crash that occurred when using the letter 'x' i a monomial/polynomial
+   - fixed a bug that caused a spam when an invalid attribute had multiple lines,
+     now only the first one is shown
+
+
+
+
+Version 1.0.1.8
+######### Changelog #########
+
+Additions:
+   - added % operator to the monomial mode
+
+Changes:
+   - fixed a bug that caused '-(' to be read incorrectly
+   - fixed a bug that caused the result to not show if it was 0 or 1
+
+
+
+
+Version 1.0.1.7
+######### Changelog #########
+
+Additions:
+   - added support for the power in the literal mode
+
+Changes:
+   - changed message for '_help *ltrl'
+
+Fixes:
+   - fixed a bug that displayed the wrong state of the Literal Mode when using the command _show
+   - fixed a bug that caused numbers in the literal mode to be read incorrectly if next to parenthesis
+   - fixed the @impossible_div_error attribute in the .lang files (except for empty.lang)
+   - fixed the @non_int_pow_error in IT.lang that was in Spanish
+   - fixed a bug that caused negative monomials to be read incorrectly
+   - fixed a bug that caused expressions ending with a closing parenthesis to be considered invalid inputs
+   - fixed a bug that prevented you to input negative monomials
+   - fixed a crash that occurred when inputting a character not supported by the UTF-8 encoding
+
+
+
+
+Version 1.0.1.6
+######### Changelog #########
+
+Additions:
+   - added polynomial support, missing powers and fractions
+   - added attribute @name_error in the $err set
+   - added @*ltrl attribute in the $cmd set
+
+Changes:
+   - changed message for '_help vshs'
+   - changed @advanced_help message, now the #ltrl command is listed
+   - removed @non_sim_mon_error from $err
+
+Fixes:
+   - fixed a bug that caused the program to crash when inserting some symbols
+     inside the path with the commands _open, _save and _vshs
+   - fixed a bug that caused forward slashes to be displayed when using the commands
+     _open or _save
+   - fixed a bug that displayed the file_saved message without having saved the file
+   - fixed a bug that created a '1' when trying to input '(-' in the literal mode
+     es. Input: (-1)  Output: 1 - 1 = 0
+   - fixed a bug that caused the 'Save file path' message in the calclog.log file
+     to have INFO and cmds.py inverted
+   - fixed @file_not_found message in EN.lang that would be in Italian
+   - fixed @non_int_pow_error messages for French and Spanish
+   - fixed @advanced_help message for French where the 6th line would be in Spanish
+
+
+
+
+Version 1.0.1.5
+######### Changelog #########
+
+Additions:
+   - literal calculation is now accessible in a beta stage
+   - added more descriptive error messages
+   - added command '#ltrt' to change from normal to literal mode
+   - added 'literal' argument in settings.json
+   - in the $out set these attributes have been added:
+     @literal
+     @operation_cancelled
+
+   - in the $out set these attributes have been added:
+     @non_sim_mon_error (This is temporary, will be removed)
+     @impossible_division_error
+     @non_int_pow_error (Not used yet)
+
+Changes:
+   - now is possible to calculate negative powers without parenthesis (10 ^ -1)
+   - ordered the settings when using the command _show
+
+Fixes:
+   - now in the calclog.log file blank lines should no longer appear
+   - now the func.py log will no longer appear after 'Process Ended'
+
+
+
+
+Version 1.0.1.4
+######### Changelog #########
+
+Additions:
+   - added command #path
+   - added the attribute @*path in the $cmd set
+   - added the following attributes to the set $msg:
+     @lang_loaded
+     @file_saved
+     @file_opened
+Changes:
+   - changed command logic for _open, '_help open' for more info
+   - renamed the attribute @num_in_mem to @no_num_name
+
+Fixes:
+   - now, the command #cmem no longer makes the program crash
+   - now the _seem command is considered valid once again
+   - the calculation respects once again the operation order
+   - now the attribute @mem_res under the $msg set is actually used
+   - now if an attribute in a .lang file is not valid, the program will continue
+     loading it instead of not loading anything after the non-valid attribute
+
+
+
+
+Version 1.0.1.3
+######### Changelog #########
+
+Additions:
+   - added monomial recognition function
+   - a new set has been added: '$err'
+   - in the $msg set have been added:
+     @settings_res
+     @mem_res (different form @mem_res in $inp)
+
+   - in the $err set have been added:
+     @no_such_cmd
+     @no_such_lang
+
+   - added more descriptive error and output messages for commands
+
+Changes:
+   - changed command format for '_open' and '_save'
+   - now all redundant parenthesis will be ignored
+   - 'commands.py' in the calclog.log file has been renamed to 'cmds.py'
+   - in the .lang files some attributes have been renamed:
+     @True -> @true
+     @False -> @false
+     @US_UK_sys -> @us_uk_sys
+     @error -> @syntax_error
+     @del_all_mem -> @mem_res
+
+   - the commands moved in $err are:
+     @syntax_error
+     @complex
+     @file_not_found
+     @invalid_command
+     @permission_error
+     @num_in_mem
+     @no_mem_cell
+     @invalid_answer
+
+Fixes:
+   - now '_vshs last' will always display the latest version
+   - fixed a bug that caused '((' to be considered a multiplication
+   - fixed several inconsistencies between .lang files
+   - fixed a bug that caused ')N' to remove the first cipher from the number
+   - now the return value of the Monomial() class is of Monomial type
+   - the program no longer crashes when trying to load an invalid language
+
+
+
+
+Version 1.0.1.2
+######### Changelog #########
+
+Additions:
+   - now to see the new features type '_vshs last'
+   - added basic calculations to the Monomial() class, not accessible yet
+   - now 'N(' and ')N' are considered multiplications
+   - added '$cmd' set on .lang files
+   - added commands attributes on .lang files (@acal, @addm, @advn...)
+   - added .lang file template: 'empty.lang'
+
+Changes:
+   - updated info message
+   - now the file nums.mem is accessible
+   - changed command format for '_lang', input '_help lang' for more details
+   - changed _lang files comments
+   - now commands infos are in the .lang files
+
+Fixes:
+   - now the numbers are fixed correctly
+   - now N / 0 no longer equals @undetermined but @impossible
+
+
+
+
+Version 1.0.1.1
+######### Changelog #########
+
+Additions:
+   - added more error output messages
+
+Changes:
+   - you can no longer set a number as a memory cell name
+   - 'languages' directory renamed to 'langs'
+   - it's no longer possible to store memory files without specifying a path
+
+Fixes:
+   - now the results that comprehend a complex number show properly
+   - now the numbers in the output string are always fixed
+
+
+Version 1.0.1.0
+######### Changelog #########
+
+Additions:
+   - added version and command files
+   - added more descriptive error messages
+   - added nums.mem file accessible by the command _open without specifying a path
+
+Changes:
+   - changed command format for _help and _vshs
+   - changed command logic for _save and _open
+
+Fixes:
+   - fixed @input_expression in IT.lang
+   - fixed parenthesis in output expression
+
+
+
+
+Version 1.0.0.7
+######### Changelog #########
+
+Additions:
+   - added _vshs command to show the VERSION_HISTORY.txt file
+   - added Monomial class, not yet accessible
+
+Changes:
+   - now the .lang files are in the 'languages' directory
+   - now 'settings.json' and 'acronym_lang.json' are in the 'settings' directory
+   - now the commands _amem, _dmem and _seem work once again, along the new ones
+   - further optimization on long calculations
+
+
+
+
+Version 1.0.0.6
+######### Changelog #########
+
+Changes:
+   - now you can save/open memory files in other directories
+
+Fixes:
+   - now the output with a complex number now displays always correctly
+   - _acal now works consistently
+
+
+
+
+Version 1.0.0.5
+######### Changelog #########
+
+Additions:
+   - added command _save, to save the current memory cells
+   - added command _open, to open a saved memory file, with file extension .mem
+
+Changes:
+   - now adjacent opening and closing parenthesis are considered a multiplication Es. (1+1) (7-4) = 6
+   - .lang files are no longer line-dependent
+
+Fixes:
+   - now a blank line appears when resetting the settings
+   - fixed output where certain parenthesis would be messed up
+   - now when you type '(N)', with N being a number, not an expression, the output expression
+     shows (N) instead of (N
+
+
+
+
+Version 1.0.0.4
+######### Changelog #########
+
+Changes:
+   - now default language is English
+
+Fixes:
+   - the program no longer crashes when inserting numbers too big
+   - now a blank line appears when showing the result
+
+
+
+
+Version 1.0.0.3
+######### Changelog #########
+
+Changes:
+   - file extension for 'settings' and 'acronym_lang' is now back to .json
+   - file extension for languages is now .lang instead of .lan
+   - now you must add parenthesis when using negatives numbers: 1 + -1 no longer works but 1 + (-1) does
+
+Fixes:
+   - program optimized with file management and invalid syntaxes
+
+
+
+
+Version 1.0.0.2
+######### Changelog #########
+
+Changes:
+   - now the file extension for 'settings' and 'acronym_lang' is .clc
+   - now thw file extension for the languages is .lan
+   - command _seem renamed to _smem
+
+Fixes:
+   - when inserting the input in the #cmem command now a blank line appears
+
+
+
+
+Version 1.0.0.1
+######### Changelog #########
+
+Fixes:
+   - now the program no longer crashes when invalid numbers are inserted
+
+
+
+
+Version 1.0.0.0
+######### Changelog #########
+
+Changes:
+   - tweaked number fixing so that now 1,9999 does not become 2 and 1,00001 does not become 1
+   - changed exponential output, now works accordingly to the system in use
+
+Fixes:
+   - now the .0 or ,0 at the end of a whole doesn't appear once again
+
+
+
+
+BETAS (only the most significant)
+
+=================================
+
+Beta 0.9.1.0
+Changelog:
+- added number fixing
+- now 1.000,1 is seen as a valid number
+
+Beta 0.9.0.1
+Changelog:
+- added the command #cmem to clear all the memory
+- command _amem renamed to _addm
+- command _dmem renamed to _delm
+- command #inst renamed to #exit
+- command _rset renamed to #rset, now visible trough the _advn command
+
+Beta 0.9.0.0
+Changelog:
+- added memory
+- added command _amem to add a number to memory
+- added command _dmem to delete a number from memory
+
+Beta 0.8.0.0
+Changelog:
+- now the program no longer crashes when trying to do X / 0 or 0R X (X is any number)
+- now the program no longer crashes when trying to do 2R -1
+- now 0^0 retrieves "Undetermined"
+- added complex number compatibility
+- added command _acal
+
+Beta 0.7.0.0
+Changelog:
+- added language support
+- added command _lang to change language
+- added command _load to reload the current language, useful when multiple instances are running at once
+- added Italian language
+- added Spanish language
+- added French language
+
+Beta 0.6.0.0
+Changelog:
+- now the current settings are saved in the file 'settings.json'
+
+Beta 0.5.0.0:
+Changelog:
+- added command _swap
+- added international system
+
+
+ALPHAS (only the most significant)
+
+==================================
+
+Alpha 0.2.0.0
+Changelog:
+- fixed many crashes regarding the parenthesis
+- fixed many crashes occurring when inserting invalid numbers
+
+Alpha 0.1.0.0
+Changelog:
+- added parenthesis support

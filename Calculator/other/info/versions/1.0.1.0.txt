@@ -1,0 +1,16 @@
+
+Version 1.0.1.0
+######### Changelog #########
+
+Additions:
+   - added version and command files
+   - added more descriptive error messages
+   - added nums.mem file accessible by the command _open without specifying a path
+
+Changes:
+   - changed command format for _help and _vshs
+   - changed command logic for _save and _open
+
+Fixes:
+   - fixed @input_expression in IT.lang
+   - fixed parenthesis in output expression

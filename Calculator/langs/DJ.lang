@@ -1,0 +1,98 @@
+$msg
+::
+::
+::
+@error
+Hix jəhina lyidəs sydək
+&
+@info
+
+Calculator by Davide Taffarello
+
+Xerijæ:
+'+' -> 
+'-' -> 
+'*' o 'x' -> 
+'/' o ':' -> 
+'^' -> shəax
+'%' -> 
+'R' -> 
+'_help' -> 
+
+
+&
+@help
+
+&
+@advanced_help
+
+&
+@example
+
+&
+@available_languages
+
+@complex
+
+&
+&
+&
+$inp
+&
+&
+&
+@expression
+Ditə jəadəh:
+@stop
+Xishitə peitəg nihixe xəiak naxshy? Taxtə: Y/N (Y = Lii, N = Sy)
+@lang_acronym
+
+@add_mem
+
+@del_mem
+
+@del_all_mem
+
+@settings_res
+
+@save_path
+
+@open_path
+
+@file_name
+
+::
+::
+::
+$out
+&
+&
+&
+@debug_mode
+
+@ignore_prth
+
+@us_uk_sys
+
+@output_string
+
+@accept_all
+
+@lang
+&Dajəhix kaax:
+@switch
+&fexidə kaa
+&
+&
+&
+$lan
+&
+&
+&
+@infinity
+
+@true
+&Liilyxe
+@false
+&Sylyxa
+@undetermined

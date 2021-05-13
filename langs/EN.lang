@@ -1,0 +1,457 @@
+$msg
+::
+::
+::
+@info_msg
+
+Calculator by Davide Taffarello
+
+Operators:
+'+' -> addition
+'-' -> subtraction
+'*' or 'X' -> multiplication
+'/' or ':' -> division
+'^' -> power
+'%' -> reminder
+'R' -> root (2R -> square root, 3R -> cubic root)
+
+A comma or a point determines the beginning of the non-integer part of the number: 1.1 = 1,1
+With the '_acal' command you can decide whether it accepts both the English writing system and
+the international one or just the one in use, '_help acal' for more information on the command.
+The operators listed above are the ones available, in the case of division and multiplication,
+both are accepted but the first of the two will be shown.
+The calculator has a memory system, do '_help _memr' for more information.
+
+A clarification regarding the root:
+if you enter '2R 2R 16' the result will not be 2 but the root 1.41421... of 16, to do it
+so that the result is 2 the brackets must be added: 2R (2R 16) = 2.
+
+Enter '_help' to open the command list, '_help _help' for more information on command.
+::
+@help_msg
+
+'_help' -> opens this list
+'_info' -> to get information about the program
+'_exmp' -> to get an example of an expression
+'_sets' -> shows the current settings
+'_memr' -> shows what is saved in memory
+'_vshs' -> shows the news of all versions
+'_vshs news' -> shows the news of the latest version
+'_advn' -> shows advanced commands
+
+'_sets swap' -> switches between English and international writing systems
+'_sets expr' -> to show or not the expression in the output
+'_sets acal' -> the input will be read according to the writing system in use or will accept all systems
+'_sets save' -> to save the settings to a file
+'_sets open' -> to open a file where the settings have been saved
+'_sets reset' -> reset settings
+
+'_lang' -> to change the language
+'_lang reload' -> reload the available languages
+
+'_ophs' -> shows the history of operations
+'_ophs clear' -> clear the operation history
+
+'_memr add' -> adds a number to the memory
+'_memr del' -> removes a number from memory
+'_memr save' -> to save the memory to a file
+'_memr open' -> to open a file where the memory has been saved
+'_memr clear' -> clears everything from memory
+
+'_ltrl' -> activates literal mode
+
+'_stop' -> to stop the program
+
+
+The commands are not case sensitive
+::
+@advanced_help
+
+'#dbug' -> shows the debug log
+'#prth' -> ignore the order of the brackets
+'#exit' -> stops the program instantly
+'#path' -> shows the folder where the program executable is located
+'#gthb' -> shows the link for the code on github
+::
+@example
+
+Input expression:       # This line always appears
+> 3R (3^2 + 18)         # This is what you type in
+3R (3 ^ 2 + 18) = 3     # This shows what the program understood and the result
+::
+@available_languages
+Available languages:
+::
+@added_to_mem
+&has been added to memory
+::
+@deleted_from_mem
+&has been deleted from memory
+::
+@empty_mem
+Memory is empty
+::
+@settings_res
+The settings have been reset
+::
+@mem_res
+The memory has been reset
+::
+@lang_loaded
+The language has been reloaded
+::
+@file_saved
+&The file has been saved at
+::
+@file_opened
+&has been opened successfully
+::
+@empty_ophs
+Operation history is empty
+::
+@ophs_res
+History deleted
+::
+::
+::
+$err
+::
+::
+::
+@syntax_error
+Invalid syntax
+::
+@non_int_root_error
+You can't calculate a complex or negative root
+::
+@file_not_found
+File not found
+::
+@invalid_command
+Invalid command
+::
+@invalid_arg
+&Invalid argument:
+::
+@permission_error
+You don't have permission to access this folder
+::
+@no_num_name
+You cannot use a number as the name of the value
+::
+@no_mem_cell
+The specified memory cell does not exist
+::
+@invalid_answer
+The answer is invalid
+::
+@no_such_cmd
+&There is no command called
+::
+@no_such_lang
+The inserted language is not currently available
+::
+@impossible_div_error
+In this calculation there is an impossible division
+::
+@non_int_pow_error
+It is not possible to calculate this power
+::
+@name_error
+The file could not be saved
+The specified name is reserved by Windows
+::
+@inaccessible_mem
+Memory is not accessible in literal mode
+::
+@other_error
+&An unexpected error occurred. The error type is:
+::
+@invalid_version
+Invalid version
+::
+@invalid_data
+The selected file was not of the expected type
+::
+::
+::
+$inp
+::
+::
+::
+@expression
+Input expression:
+::
+@stop
+Do you really want to exit? Answer: Y/N (Y = Yes, N = No)
+::
+@lang_acronym
+Write the acronym of your language:
+::
+@add_mem
+Input the name and the value if it has to be specified:
+::
+@del_mem
+Input the name of the value to delete:
+::
+@mem_res
+Do you really want to delete all the memory? Answer: Y/N (Y = Yes, N = No)
+::
+@settings_res
+Do you really want to reset the settings? Answer: Y/N (Y = Yes, N = No)
+::
+@save_path
+Input the filepath of the folder you wat to save the file in:
+::
+@open_path
+Input the filepath of the folder where the file is:
+::
+@file_name
+Input the name of the file (do not add .mem):
+::
+@ophs_res
+Are you sure you want to delete the history? Answer: Y/N (Y = Yes, N = No)
+::
+::
+::
+$out
+::
+::
+::
+@debug_mode
+&Debug mode
+::
+@ignore_prth
+&Ignore parenthesis
+::
+@us_uk_sys
+&English system
+::
+@output_string
+&Output expression
+::
+@accept_all
+&Accept all systems
+::
+@lang
+&Current language
+::
+@switch
+&is now
+::
+@literal
+&Literal calculation
+::
+@operation_cancelled
+Operation cancelled
+::
+::
+::
+$lan
+::
+::
+::
+@infinity
+&Infinity
+::
+@true
+&True
+::
+@false
+&False
+::
+@undetermined
+&Undetermined
+::
+@impossible
+&Impossible
+::
+::
+::
+$cmd
+::
+::
+::
+@bs_advn
+There is no further information for this command.
+::
+@bs_exmp
+There is no further information for this command.
+::
+@bs_help
+
+Shows all commands and their uses.
+Syntax:
+> _help <command>
+
+command -> the command you are searching information about, with the prefix included
+
+Example:
+> _help #dbug
+> _help _save
+::
+@bs_info
+There is no further information for this command.
+::
+@bs_lang
+
+With this command you change the language of the program.
+Syntax:
+> _lang <language>
+> _lang reload
+
+<language> -> an optional parameter where you can enter the acronym of the language
+reload -> reloads the language
+
+Example:
+> _lang EN
+> 'Current language' is now English
+::
+@bs_stop
+There is no further information for this command.
+::
+@bs_vshs
+
+It shows the changes of each version
+
+You can specify a particular version otherwise they will come
+view all.
+
+Syntax:
+> _vshs <version>
+> _vshs news
+> _vshs path
+
+<version> -> a version of those listed when doing the _vshs command
+            without specifying it
+news -> shows the news of the latest version
+path -> shows the path of the VERSION_HISTORY.txt file
+::
+@ad_dbug
+
+It shows the debug log when performing a calculation and shows
+a partial log in the calclog.log file.
+::
+@ad_exit
+There is no further information for this command.
+::
+@ad_prth
+There is no further information for this command.
+::
+@ad_path
+There is no further information for this command.
+::
+@bs_ltrl
+Turns on literal mode.
+It supports monomials and polynomials and the possible operations are:
+
+P -> Polynomial
+M -> Monomial
+
+M + M, P + M, P + P
+M - M, P - M, P - P
+M * M, P * M, P * P
+M / M, P / M
+MR M*
+M ^ M, P ^ M*
+
+* it is not always possible to do this operation
+::
+@bs_memr
+This command manages the memory, it can add elements, remove them, save them in a file
+and open previously saved files.
+
+Syntax:
+> _memr add <value_name*> <value*>
+> _memr del <value_name*>
+> _memr save <path*>
+> _memr open <path*> <overwrite: true/false*>
+
+* it is not necessary to enter this value, but if it is not entered either
+ the following ones must not be inserted
+
+add -> adds a value to the memory
+   - value_name -> name of the value that will be replaced with the memory value, cannot
+     be a number
+   - value -> the value assigned to value_name, a number
+
+del -> removes a value from memory
+   - value_name -> the name given to the value to be removed
+
+save -> save a memory file
+   - path -> is the path of the folder where the file is located, you can add the file name
+             to the file separated by a slash (\) to the rest of the path. If it contains space it can be
+             surrounded by double quotes (").
+
+open -> opens a memory file
+   - path -> is the path of the folder where the file is located, you can add the file name
+             to the file separated by a slash (\) to the rest of the path. If it contains spaces it can be
+             surrounded by double quotes (").
+   - overwrite -> set to 'true' replaces the imported memory, to 'false' replaces the values with the
+                  same name and adds those that are not in memory, does not delete anything.
+                  If the value is not specified it will be 'false' by default
+
+Ex:
+> _memr add pi 3.14
+> _memr of the pi
+> _memr save "C:\Users\[USERNAME]\Desktop\calc memory\pi.calc"
+> _memr open "C:\Users\[USERNAME]\Desktop\calc memory\pi.calc" true
+
+::
+@bs_sets
+Change some of the calculator settings.
+
+Syntax:
+> _sets <set>
+> _sets reset
+> _sets save <path *>
+> _sets open <path *>
+
+* it is not necessary to enter this value, but if it is not entered either
+ the following ones must not be inserted
+
+set -> the name of a setting (expr, acal, swap)
+   - expr -> to show or not the expression in the output
+
+   - acal -> Toggle between 'accept all systems' and 'accept current system'
+
+             To recognize all systems, it works like this:
+             - Check the number of periods and commas
+             - If there are more periods and / or commas, ignore them / e
+             - If there is a are period and a single comma, ignore the one that comes first
+
+             Example:
+             > 1.658.156,488 -> 2 points, one comma: ignore periods -> 1658156.488
+             > 12.189,14 -> a period, a comma: ignores nothing -> the period comes first: ignores the period -> 12189.14
+             > 1.000 -> a period, 0 commas: ignores nothing -> 1.0
+
+             In case you only accept the current system:
+             If the current system is English, ignore commas
+             If the current system is international ignore the points
+
+   - swap -> Change cutout between the English and international writing system
+
+             In the international system, points for thousands and commas are used
+             for the decimal part.
+
+             In the English system, commas are used for thousands and a period for
+             the decimal part.
+
+reset -> reset settings except language
+
+save -> save a settings file
+   - path -> is the path of the folder where the file is located, you can add the file name
+             to the file separated by a slash (\) to the rest of the path. If it contains spaces it can be
+             surrounded by double quotes (").
+
+open -> opens a settings file
+   - path -> is the path of the folder where the file is located, you can add the file name
+             to the file separated by a slash (\) to the rest of the path. If it contains spaces it can be
+             surrounded by double quotes (").
+::
+@bs_ophs
+There is no further information for this command.
+::
+@ad_gthb
+There is no further information for this command.
+::

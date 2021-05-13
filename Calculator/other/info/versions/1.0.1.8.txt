@@ -1,0 +1,10 @@
+
+Version 1.0.1.8
+######### Changelog #########
+
+Additions:
+   - added % operator to the monomial mode
+
+Changes:
+   - fixed a bug that caused '-(' to be read incorrectly
+   - fixed a bug that caused the result to not show if it was 0 or 1

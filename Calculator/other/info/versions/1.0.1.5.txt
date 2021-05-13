@@ -1,0 +1,25 @@
+
+Version 1.0.1.5
+######### Changelog #########
+
+Additions:
+   - literal calculation is now accessible in a beta stage
+   - added more descriptive error messages
+   - added command '#ltrt' to change from normal to literal mode
+   - added 'literal' argument in settings.json
+   - in the $out set these attributes have been added:
+     @literal
+     @operation_cancelled
+
+   - in the $out set these attributes have been added:
+     @non_sim_mon_error (This is temporary, will be removed)
+     @impossible_division_error
+     @non_int_pow_error (Not used yet)
+
+Changes:
+   - now is possible to calculate negative powers without parenthesis (10 ^ -1)
+   - ordered the settings when using the command _show
+
+Fixes:
+   - now in the calclog.log file blank lines should no longer appear
+   - now the func.py log will no longer appear after 'Process Ended'
