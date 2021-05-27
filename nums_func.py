@@ -32,7 +32,11 @@ def find_num(string: str, use_mem=True) -> OptionalFloat:
             ignore_char_list += ","
 
         if ignore_char_list == ["(", ")"]:
-            ignore_char_list += "." if char_last_pos["points"] < char_last_pos["commas"] else ","
+            if char_last_pos["points"] < char_last_pos["commas"]:
+                ignore_char_list += "."
+
+            else:
+                ignore_char_list += ","
 
     elif sets.settings["us_uk_sys"]:
         ignore_char_list = ["(", ")", ","]
@@ -48,9 +52,9 @@ def find_num(string: str, use_mem=True) -> OptionalFloat:
         return float(string_number)
     except ValueError:
         lang.write_error_log(
-            "ValueError",
-            "nums_func.py|find_num()|except",
-            sets.settings["debug_mode"]
+            message="ValueError",
+            module =lang.this_line(__name__),
+            print_message=sets.settings["debug_mode"]
         )
 
         try:
@@ -61,9 +65,9 @@ def find_num(string: str, use_mem=True) -> OptionalFloat:
 
         except KeyError:
             lang.write_error_log(
-                "KeyError",
-                "nums_func.py|find_num()|except|except",
-                sets.settings["debug_mode"]
+                message="KeyError",
+                module =lang.this_line(__name__),
+                print_message=sets.settings["debug_mode"]
             )
 
             return None
@@ -74,7 +78,8 @@ def fix(number) -> OptionalFloat:
 
     if type(number) is not float: return number
 
-    # If the decimal part is longer than 10 digits is worth to try and fix it, else there's probably no error
+    # If the decimal part is longer than 10 digits is worth to try and fix it,
+    # else there's probably no error
     if len(str(number)) - len(str(int(number))) < 10:
         return number
 
@@ -104,7 +109,11 @@ def fix(number) -> OptionalFloat:
 
             elif string[char] == "9" and string[char - 1] == "9":
                 if cons_nines == 0:
-                    nines_start = char - 2 if string[char - 2] == "." else char - 1
+                    if string[char-2] == ".":
+                        nines_start = char - 2
+                    else:
+                        nines_start = char - 1
+                        
                 cons_nines += 1
 
             else:
@@ -135,9 +144,9 @@ def fix(number) -> OptionalFloat:
 
             except ValueError:
                 lang.write_error_log(
-                    "ValueError",
-                    "nums_func.py|fix()|if|if|except",
-                    sets.settings["debug_mode"]
+                    message="ValueError",
+                    module =lang.this_line(__name__),
+                    print_message=sets.settings["debug_mode"]
                 )
 
                 fixed_number = str(int(string[:nines_start]) + 1)
@@ -151,9 +160,9 @@ def fix(number) -> OptionalFloat:
             return float(fixed_number)
         except ValueError:
             lang.write_error_log(
-                "ValueError",
-                "nums_func.py|fix()|if|except",
-                sets.settings["debug_mode"]
+                message="ValueError",
+                module =lang.this_line(__name__),
+                print_message=sets.settings["debug_mode"]
             )
 
             return number
@@ -168,18 +177,18 @@ def num_to_str(number: float) -> str:
 
     except OverflowError:
         lang.write_error_log(
-            "OverflowError",
-            "nums_func.py|num_to_str()|except",
-            sets.settings["debug_mode"]
+            message="OverflowError",
+            module =lang.this_line(__name__),
+            print_message=sets.settings["debug_mode"]
         )
 
         return LANGUAGE.lan.infinity
 
     except TypeError:
         lang.write_error_log(
-            "TypeError",
-            "nums_func.py|num_to_str()|except",
-            sets.settings["debug_mode"]
+            message="TypeError",
+            module =lang.this_line(__name__),
+            print_message=sets.settings["debug_mode"]
         )
 
         if type(number) is complex:

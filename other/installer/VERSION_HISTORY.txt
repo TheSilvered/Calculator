@@ -1,7 +1,25 @@
 VERSION HISTORY
 
 ===============
-Version 1.0.2.1 *NEW*
+Version 1.0.2.2 *NEW*
+######### Changelog #########
+Additions:
+   - added various messages to the debug mode and to the log
+
+Changes:
+   - now, when putting the name of the file, the file name is recongnized also when
+     inserting '.calc'
+   - the output in the log files and while the debug mode is active, is now easier
+     to understand
+   - changed github link
+
+Fixes:
+   - now, in the debug mode, the root operations are dispayed correctly
+
+
+
+
+Version 1.0.2.1
 ######### Changelog #########
 Additions:
    - added commands _memr, _sets, _ophs and #gthb

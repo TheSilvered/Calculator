@@ -75,7 +75,6 @@ class Language:
 
 
     class Cmd:
-        # bs_ -> basic, ad_ -> advanced
         bs_advn = ""
         bs_exmp = ""
         bs_help = ""

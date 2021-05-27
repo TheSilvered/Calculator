@@ -7,10 +7,13 @@ import lang_attrs
 # External modules
 ################################
 import json
-
-
+from inspect import currentframe
 
 language = lang_attrs.Language
+
+
+def this_line(name):
+    return f"{name}: line {currentframe().f_back.f_lineno}"
 
 
 def write_error_log(message: str, module: str, print_message: bool = False):
@@ -35,7 +38,7 @@ def write_debug_log(message: str, module: str, print_message: bool = False):
 
 
 def write_process_started_log():
-    with open(f"settings/process_count.json") as process_j:
+    with open(f"settings/process_count.json", "r") as process_j:
         process = json.load(process_j)
 
     with open(f"{lang_attrs.log_dir}error.log", "a") as log:
@@ -64,51 +67,60 @@ def write_process_ended_log():
         log.write(f"=============== Process ended ===============\n")
 
 
-def load_txt(acronym: str):
+def load_txt(acronym: str, lang_dir: str = "langs", log=True):
     def add_to_attr(obj, attr, st, txt=""):
         new_attr = getattr(getattr(obj, st), attr)
         setattr(getattr(obj, st), attr, new_attr + txt)
 
     global language
 
+    # Resets all attributes to be empty
     language = lang_attrs.Language
 
-    file = open(f"langs/{acronym}.lang", "r")
+    file = open(f"{lang_dir}/{acronym}.lang", "r")
     main_set = ""
-    attribute = ""
-    previous_invalid_attribute = ""
+    attr = ""
+    prev_invalid_attr = ""
     first_line = False
 
-    for line_count, line in enumerate(file):
-        if line[0] == "$":
-            main_set = line.replace("$", "").replace("\n", "")
+    for l_no, l_no in enumerate(file):
+        if l[0] == "$":
+            main_set = l.replace("$", "").replace("\n", "")
 
-        elif line[0] == "@":
-            attribute = line.replace("@", "").replace("\n", "")
+        elif l[0] == "@":
+            attr = l.replace("@", "").replace("\n", "")
             first_line = True
 
         else:
-            if line[0] == "&":
-                line = line.replace("&", "").replace("\n", "")
+            if l[0] == "&":
+                l = l.replace("&", "").replace("\n", "")
 
-            elif line[0:2] == "::":
+            elif l[0:2] == "::":
                 continue
 
-            if hasattr(getattr(language, main_set), attribute):
-                if first_line: setattr(getattr(language, main_set), attribute, "")
-                add_to_attr(language, attribute, main_set, line)
+            if hasattr(getattr(language, main_set), attr):
+                if first_line:
+                    setattr(getattr(language, main_set), attr, "")
+                add_to_attr(language, attr, main_set, l)
                 first_line = False
 
-            elif previous_invalid_attribute != attribute:
-                write_error_log(
-                    f"Invalid attribute: '@{attribute}' at line {line_count}",
-                    "lang.py|load_txt()|for|else|elif",
-                    True
-                )
-                previous_invalid_attribute = attribute  # Prevents spam in a multiline invalid attribute
+            elif prev_invalid_attr != attr:
+                if log:
+                    write_error_log(
+                        message=f"Invalid attribute: '@{attr}' at line {l_no}",
+                        module =this_line(__name__),
+                        print_message=True
+                    )
+
+                # Prevents spam in a multiline invalid attribute
+                prev_invalid_attr = attr
 
     file.close()
 
-    write_info_log("Text loaded", "lang.py|load_txt()")
+    if log:
+        write_info_log(
+            message="Text loaded",
+            module ="lang.py|load_txt()"
+        )
 
     return language

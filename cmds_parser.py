@@ -4,7 +4,9 @@ class InvalidCommandError(Exception):
 		
 
 class Command:
-	def __init__(self, name: str, args: list = None, func=None, accepts_args=False):
+	def __init__(self, name: str, args: list = None, func=None,
+		  accepts_args=False):
+
 		def f(smth=True):
 			if smth: pass
 			pass
@@ -32,7 +34,9 @@ class Command:
 			self.func()
 
 
-def parse(cmd_string: str, key: str, mapping: dict, float_func=None, float_func_args=None):
+def parse(cmd_string: str, key: str, mapping: dict, float_func=None,
+	  float_func_args=None):
+
 	if len(cmd_string) == 0 or cmd_string[0] not in key:
 		return None
 
@@ -46,8 +50,8 @@ def parse(cmd_string: str, key: str, mapping: dict, float_func=None, float_func_
 	quotes_open = []
 	quotes_close = []
 
-	# Merges every element in args that is between one with the fist character that is "
-	# and one with the last character that is "
+	# Merges every element in args that is between one with the fist
+	# character that is " and one with the last character that is "
 	for i, arg in enumerate(args):
 		if len(arg) >= 1 and arg[0] == '"': quotes_open.append(i)
 		elif len(arg) >= 1 and arg[-1] == '"': quotes_close.append(i)

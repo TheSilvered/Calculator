@@ -12,19 +12,26 @@ import cmds_parser
 import json
 import os
 import pyperclip
+from inspect import currentframe
 
 LANGUAGE = lang.language
-
+LOCAL_DIR = os.path.abspath(".")
 last_result = None
-	
+
 
 class InvalidDataFileError(Exception):
-	"""Exception raised when trying to open a .calc file and it's not valid or of the expected type"""
+	"""
+	Exception raised when trying to open a .calc file and it's not valid or of
+	the expected type
+	"""
 	pass
 
 
 class ReservedNameError(Exception):
-	"""Exception raised when trying to save a file with a windows reserved name such as CON, PRN, AUX, .."""
+	"""
+	Exception raised when trying to save a file with a windows reserved name
+	such as CON, PRN, AUX, ...
+	"""
 	pass
 
 
@@ -54,7 +61,6 @@ def exe(usr_inp: str):
 		"#prcs": {"func": ad_process           , "args": False}
 	}
 
-	# The commands are not necessarily 5 characters long but before they had to so i continue to do so
 	try:
 		command = cmds_parser.parse(
 			cmd_string=usr_inp,
@@ -79,10 +85,17 @@ def exe(usr_inp: str):
 
 		settings.update_settings()
 
-	except (KeyError, OSError, TypeError, InvalidDataFileError, cmds_parser.InvalidCommandError) as error:
+	except (
+		KeyError,
+		OSError,
+		TypeError,
+		InvalidDataFileError,
+		cmds_parser.InvalidCommandError
+
+	) as e:
 		lang.write_error_log(
-			message=f"KeyError, OSError, TypeError, cmds_parser.InvalidCommandError: {error}",
-			module ="new_cmds.py|find_command()|except",
+			message=f"KeyError, OSError, TypeError, InvalidCommandError: {e}",
+			module =lang.this_line(__name__),
 			print_message=settings.settings["debug_mode"]
 		)
 
@@ -91,7 +104,7 @@ def exe(usr_inp: str):
 	except InvalidDataFileError:
 		lang.write_error_log(
 			message="InvalidDataFileError",
-			module ="new_cmds.py|find_command()|except",
+			module =lang.this_line(__name__),
 			print_message=settings.settings["debug_mode"]
 		)
 
@@ -100,7 +113,7 @@ def exe(usr_inp: str):
 	except FileNotFoundError:
 		lang.write_error_log(
 			message="FileNotFoundError",
-			module ="new_cmds.py|find_command()|except",
+			module =lang.this_line(__name__),
 			print_message=settings.settings["debug_mode"]
 		)
 
@@ -109,7 +122,7 @@ def exe(usr_inp: str):
 	except PermissionError:
 		lang.write_error_log(
 			message="PermissionError",
-			module ="new_cmds.py|find_command()|except",
+			module =lang.this_line(__name__),
 			print_message=settings.settings["debug_mode"]
 		)
 
@@ -118,7 +131,7 @@ def exe(usr_inp: str):
 	except UnicodeError:
 		lang.write_error_log(
 			message="UnicodeError",
-			module ="new_cmds.py|find_command()|except",
+			module =lang.this_line(__name__),
 			print_message=settings.settings["debug_mode"]
 		)
 
@@ -127,7 +140,7 @@ def exe(usr_inp: str):
 	except ReservedNameError:
 		lang.write_error_log(
 			message="ReservedNameError",
-			module ="new_cmds.py|find_command()|except",
+			module =lang.this_line(__name__),
 			print_message=settings.settings["debug_mode"]
 		)
 
@@ -135,15 +148,14 @@ def exe(usr_inp: str):
 
 	return "continue"
 
-
+#-------------------------------------------------------------------------------
 def get_answer(message:str):
 	answer = input(f"\n{message}> ")
 	if answer.lower() == "y": return True
 	elif answer.lower() == "n": return False
 	else: return None
 
-#-----------------------------------------------------------------------------------------------------------------------
-
+#-------------------------------------------------------------------------------
 def switch_settings(dict_key: str):
 	settings.settings[dict_key] = not settings.settings[dict_key]
 
@@ -155,8 +167,33 @@ def switch_settings(dict_key: str):
 
 	print(f"'{parameter_changed}' {is_now} {true_or_false}\n")
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+def set_path(args):
+	if len(args) == 1:
+		file_path = input(f"\n{LANGUAGE.inp.open_path}> ")
 
+	elif len(args) == 2:
+		file_path = args[1]
+
+	else:
+		raise cmds_parser.InvalidCommandError
+
+	if len(file_path) <= 5 or file_path[-5:] != ".calc":
+		name = input(f"\n{LANGUAGE.inp.file_name}> ")
+
+		if len(name) <= 5 or name[-5:] != ".calc":
+			name += ".calc"
+
+		file_path = os.path.join(file_path, name)
+
+	file_path = file_path.replace("/", "\\")
+
+	lang.write_info_log(
+		message=f"Save file path: {file_path}",
+		module =lang.this_line(__name__)
+	)
+
+#-------------------------------------------------------------------------------
 def bs_help(args):
 	# If there is no command specified
 	if not args:
@@ -174,37 +211,33 @@ def bs_help(args):
 	else:
 		print(f"{LANGUAGE.err.invalid_arg} '{args[1]}'\n")
 
-#-----------------------------------------------------------------------------------------------------------------------
-
+#-------------------------------------------------------------------------------
 def bs_info():
 	print(LANGUAGE.msg.info_msg)
 
-#-----------------------------------------------------------------------------------------------------------------------
-
+#-------------------------------------------------------------------------------
 def bs_advanced():
 	print(LANGUAGE.msg.advanced_help)
 
-#-----------------------------------------------------------------------------------------------------------------------
-
+#-------------------------------------------------------------------------------
 def bs_example():
 	print(LANGUAGE.msg.example)
 
-#-----------------------------------------------------------------------------------------------------------------------
-
+#-------------------------------------------------------------------------------
 def bs_vs_history(args):
 	NEWS_KEYWORDS = ["last", "latest", "news", "potato"]
-
+	VS_PATH = "other/installer/VERSION_HISTORY.txt"
 
 	def show_all():
 		print()
-		with open("other/installer/VERSION_HISTORY.txt", "r") as version_history_file:
+		with open(VS_PATH, "r") as version_history_file:
 			for line in version_history_file:
 				print(line.replace("\n", ""))
 		print()
 
 
 	def show_news():
-		with open("other/installer/VERSION_HISTORY.txt", "r") as version_history_file:
+		with open(VS_PATH, "r") as version_history_file:
 			for line_count, line in enumerate(version_history_file):
 				if line_count == 3:
 					# The last version is always in this position in the file
@@ -229,35 +262,53 @@ def bs_vs_history(args):
 		show_all()
 
 	elif args == ["path"]:
-		print(f"{os.path.abspath('.')}\\other\\installer\\VERSION_HISTORY.txt")
-		pyperclip.copy(f"{os.path.abspath('.')}\\other\\installer\\VERSION_HISTORY.txt")
+		path = os.path.join(LOCAL_DIR, VS_PATH)
+
+		print(path, "\n")
+		pyperclip.copy(path)
 
 	elif len(args) == 1 and args[0].lower() in NEWS_KEYWORDS:
 		show_news()
 
-	elif len(args) == 1:  # If there is something as an argument but is not a keyword
+	elif len(args) == 1:
 		show_version(args[0])
 
 	else:
 		print(f"{LANGUAGE.err.invalid_arg} '{args[1]}'\n")
 
-#-----------------------------------------------------------------------------------------------------------------------
-
+#-------------------------------------------------------------------------------
 def bs_settings(args):
 	def show():
+		def make_str(st: str, gt_from="settings"):
+			setting = settings.settings[st]
+
+			if gt_from == "settings": 
+				set_status = getattr(LANGUAGE.lan, str(setting).lower())
+			elif gt_from == "lang_acronyms":
+				set_status = settings.lang_acronyms[setting]
+			else:
+				set_status = ""
+
+			string = ""
+			string += f"{getattr(LANGUAGE.out, st)}: "
+			string += set_status
+
+
+			return string
+
 		print()
 
-		print(f"{LANGUAGE.out.debug_mode   }: {getattr(LANGUAGE.lan, str(settings.settings['debug_mode'   ]).lower())}")
-		print(f"{LANGUAGE.out.ignore_prth  }: {getattr(LANGUAGE.lan, str(settings.settings['ignore_prth'  ]).lower())}")
-		print(f"{LANGUAGE.out.output_string}: {getattr(LANGUAGE.lan, str(settings.settings['output_string']).lower())}")
-		print(f"{LANGUAGE.out.literal      }: {getattr(LANGUAGE.lan, str(settings.settings['literal'      ]).lower())}")
+		print(make_str("debug_mode"))
+		print(make_str("ignore_prth"))
+		print(make_str("output_string"))
+		print(make_str("literal"))
 		print()
 
-		print(f"{LANGUAGE.out.us_uk_sys    }: {getattr(LANGUAGE.lan, str(settings.settings['us_uk_sys'    ]).lower())}")
-		print(f"{LANGUAGE.out.accept_all   }: {getattr(LANGUAGE.lan, str(settings.settings['accept_all'   ]).lower())}")
+		print(make_str("us_uk_sys"))
+		print(make_str("accept_all"))
 		print()
 
-		print(f"{LANGUAGE.out.lang         }: {settings.lang_acronyms[settings.settings['lang']]                     }")
+		print(make_str("lang", "lang_acronyms"))
 		print()
 
 
@@ -265,7 +316,7 @@ def bs_settings(args):
 		answer = get_answer(LANGUAGE.inp.settings_res)
 		lang.write_info_log(
 			message=f"Answer: {answer}",
-			module= "new_cmds.py|bs_settings()|reset()"
+			module =lang.this_line(__name__)
 		)
 
 		if answer is None:
@@ -284,25 +335,34 @@ def bs_settings(args):
 			print(LANGUAGE.out.operation_cancelled)
 
 	def open_settings_file(file_info):
+		if len(file_info) == 1:
+			file_path = input(f"\n{LANGUAGE.inp.open_path}> ")
 
-		if len(file_info) == 1  : file_path = input(f"\n{LANGUAGE.inp.open_path}> ")
+		elif len(file_info) == 2:
+			file_path = file_info[1]
 
-		elif len(file_info) == 2: file_path = file_info[1]
+		else:
+			print(f"{LANGUAGE.err.invalid_arg} '{file_info[3]}'\n")
+			return
 
-		else: raise cmds_parser.InvalidCommandError
+		file_path = file_path.replace("/", "\\")
 
 		lang.write_info_log(
 			message=f"Open file path: {file_path}",
-			module= "new_cmds.py|bs_memory()|open_settings_file()"
+			module =lang.this_line(__name__)
 		)
 
-		if not (len(file_path) >= 5 and file_path[-5:] == ".calc"):
-			file_path += "/" if file_path != "" else ""
-			file_path += input(f"\n{LANGUAGE.inp.file_name}> ") + ".calc"
+		if len(file_path) <= 5 or file_path[-5:] != ".calc":
+			fname = input(f"\n{LANGUAGE.inp.file_name}> ")
+
+			if len(name) <= 5 or name[-5:] != ".calc":
+				name += ".calc"
+
+			file_path = os.path.join(file_path, name)
 
 		lang.write_info_log(
 			message=f"Open file name: {file_path}",
-			module= "new_cmds.py|bs_memory()|open_settings_file()|if"
+			module =lang.this_line(__name__)
 		)
 
 		with open(file_path, "r") as sets_file:
@@ -319,30 +379,48 @@ def bs_settings(args):
 
 		# Prevents invalid settings from being inserted
 		for key in new_sets:
-			if not key in settings.settings or type(new_sets[key]) is not type(settings.settings[key]):
+			if not key in settings.settings:
+				raise InvalidDataFileError
+
+			if type(new_sets[key]) is not type(settings.settings[key]):
 				raise InvalidDataFileError
 
 		with open("settings/settings.json", "w") as json_settings:
 			json.dump(new_sets, json_settings)
 
 		settings.update_settings()
-		lang.load_txt(settings.settings["lang"])
+		bs_language(["reload"])
 
-		print("'" + file_path.replace("/", "\\") + "' " + LANGUAGE.msg.file_opened + "\n")
+		print(f"'{file_path}' {LANGUAGE.msg.file_opened}\n")
 
 
 	def save_settings_file(file_info):
 
-		if len(file_info) == 1: file_path = input(f"\n{LANGUAGE.inp.open_path}> ")
-		elif len(file_info) == 2: file_path = file_info[1]
-		else: raise cmds_parser.InvalidCommandError
+		if len(file_info) == 1:
+			file_path = input(f"\n{LANGUAGE.inp.open_path}> ")
 
-		if not (len(file_path) >= 5 and file_path[-5:] == ".calc"):  # If the name has been put in the path
-			file_path += "/" + input(f"\n{LANGUAGE.inp.file_name}> ") + ".calc"
+		elif len(file_info) == 2:
+			file_path = file_info[1]
+
+		else:
+			print(f"{LANGUAGE.err.invalid_arg} '{file_info[2]}'\n")
+			return
+
+		file_path = file_path.replace("/", "\\")
+
+		if len(file_path) <= 5 or file_path[-5:] != ".calc":
+			name = input(f"\n{LANGUAGE.inp.file_name}> ")
+
+			if len(name) <= 5 or name[-5:] != ".calc":
+				name += ".calc"
+
+			file_path = os.path.join(file_path, name)
+
+		file_path = file_path.replace("/", "\\")
 
 		lang.write_info_log(
 			message=f"Save file path: {file_path}",
-			module= "new_cmds.py|bs_memory()|save_memory_file()"
+			module =lang.this_line(__name__)
 		)
 
 		last_slash = 0
@@ -352,12 +430,12 @@ def bs_settings(args):
 
 		file_name = file_path[last_slash:-5].lower()  # The -5 removes .calc
 		RESERVED_FILE_NAMES = [
-			"con","prn", "aux", "nul", "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com7", "com8", "com9",
-			"com0", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9", "lpt0"
+			"con",  "prn",  "aux",  "nul",  "com1", "com2", "com3", "com4",
+			"com5", "com6", "com7", "com7", "com8", "com9", "com0", "lpt1", 
+			"lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9",
+			"lpt0"
 		]
 
-		# When you try to save a file with any of the name above the file doesn't save and no error is raised
-		# so I raise it here to prevent this
 		if file_name in RESERVED_FILE_NAMES:
 			raise ReservedNameError
 
@@ -369,7 +447,7 @@ def bs_settings(args):
 		settings.update_settings()
 		bs_language(["reload"])
 
-		print(LANGUAGE.msg.file_saved + " " + file_path.replace("/", "\\"), "\n")
+		print(f"{LANGUAGE.msg.file_saved} {file_path}\n")
 
 
 	if not args:
@@ -396,7 +474,7 @@ def bs_settings(args):
 	else:
 		print(f"{LANGUAGE.err.invalid_arg} '{args[0]}'\n")
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def bs_language(args):
 	def reload_lang():
@@ -415,12 +493,12 @@ def bs_language(args):
 
 		lang.write_info_log(
 			message=f"acronym = {lang_acronym}",
-			module= "new_cmds.py|bs_language()|add_language()"
+			module =lang.this_line(__name__)
 		)
 
 		lang.write_info_log(
 			message=f"lang_name = {lang_name}",
-			module= "new_cmds.py|bs_language()|add_language()"
+			module =lang.this_line(__name__)
 		)
 
 		# To make sure the file exists
@@ -456,25 +534,29 @@ def bs_language(args):
 
 	lang.write_info_log(
 		message=f"Acronym: {language}",
-		module= "new_cmds.py|bs_language()"
+		module =lang.this_line(__name__)
 	)
 
 
 	if language in settings.lang_acronyms:
 		settings.settings["lang"] = language
 		lang.load_txt(language)
-		print(f"'{LANGUAGE.out.lang}' {LANGUAGE.out.switch} {settings.lang_acronyms[language]}\n")
+		print(
+			f"'{LANGUAGE.out.lang}' "
+			f"{LANGUAGE.out.switch} "
+			f"{settings.lang_acronyms[language]}\n"
+		)
 
 	else: print(LANGUAGE.err.no_such_lang)
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def bs_stop():
 	answer = get_answer(LANGUAGE.inp.stop)
 
 	lang.write_info_log(
 		message=f"Answer: {answer}",
-		module= "new_cmds.py|bs_stop()"
+		module =lang.this_line(__name__)
 	)
 
 	if answer is None:
@@ -486,7 +568,7 @@ def bs_stop():
 	else:
 		print(LANGUAGE.out.operation_cancelled)
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def bs_memory(args):
 
@@ -496,12 +578,14 @@ def bs_memory(args):
 		else:
 			print()
 			for key in nums_func.memory:
-				try: print(f"{key} = {nums_func.num_to_str(nums_func.memory[key])}")
+				try:
+					value = nums_func.num_to_str(nums_func.memory[key])
+					print(f"{key} = {value}")
 
 				except OverflowError:
 					lang.write_error_log(
 						message="OverflowError",
-						module= "new_cmds.py|bs_memory()|show_memory()|else|for|except",
+						module =lang.this_line(__name__),
 						print_message=settings.settings["debug_mode"]
 					)
 
@@ -515,12 +599,16 @@ def bs_memory(args):
 
 			lang.write_info_log(
 				message=f"Input: {add_mem}",
-				module= "new_cmds.py|bs_memory()|add_memory()|if"
+				module =lang.this_line(__name__)
 			)
 
 			name_value = add_mem.split()
 			mem_cell_name = name_value[0]
-			mem_cell_value = nums_func.find_num(name_value[1]) if len(name_value) > 1 else last_result
+			if len(name_value) > 1:
+				mem_cell_value = nums_func.find_num(name_value[1])
+
+			else:
+				mem_cell_value = last_result
 
 			if mem_cell_value is None and last_result is not None:
 				print(f"{LANGUAGE.err.invalid_arg} '{name_value[1]}'\n")
@@ -536,7 +624,8 @@ def bs_memory(args):
 				mem_cell_value = last_result
 
 			else:
-				mem_cell_value = num_to_add_info[2]  # The value is already a float
+				# The value is already a float
+				mem_cell_value = num_to_add_info[2]
 
 			if type(mem_cell_name) is float:
 				print(f"{LANGUAGE.err.invalid_arg} '{num_to_add_info[1]}'\n")
@@ -552,12 +641,12 @@ def bs_memory(args):
 
 		lang.write_info_log(
 			message=f"Name: {mem_cell_name}",
-			module= "new_cmds.py|bs_memory()|add_memory()"
+			module =lang.this_line(__name__)
 		)
 
 		lang.write_info_log(
 			message=f"Value: {mem_cell_value}",
-			module= "new_cmds.py|bs_memory()|add_memory()"
+			module =lang.this_line(__name__)
 		)
 
 		if nums_func.find_num(mem_cell_name, False) is not None:
@@ -566,7 +655,9 @@ def bs_memory(args):
 
 		nums_func.memory[mem_cell_name] = mem_cell_value
 
-		print(f"'{mem_cell_name} = {nums_func.num_to_str(mem_cell_value)}' {LANGUAGE.msg.added_to_mem}\n")
+		str_value = nums_func.num_to_str(mem_cell_value)
+
+		print(f"'{mem_cell_name} = {str_value}' {LANGUAGE.msg.added_to_mem}\n")
 
 
 	def del_memory(num_to_del_info):
@@ -582,7 +673,8 @@ def bs_memory(args):
 
 		lang.write_info_log(
 			message=f"Cell: {mem_cell_name}",
-			module= "new_cmds.py|bs_memory()|del_memory()")
+			module =lang.this_line(__name__)
+		)
 
 		try:
 			del nums_func.memory[mem_cell_name]
@@ -591,7 +683,7 @@ def bs_memory(args):
 		except KeyError:
 			lang.write_error_log(
 				message="KeyError",
-				module= "new_cmds.py|bs_memory()|del_memory()",
+				module =lang.this_line(__name__),
 				print_message=settings.settings["debug_mode"]
 			)
 
@@ -602,7 +694,7 @@ def bs_memory(args):
 		answer = get_answer(LANGUAGE.inp.mem_res)
 		lang.write_info_log(
 			message=f"Answer: {answer}",
-			module= "new_cmds.py|bs_memory()|clear_memory()"
+			module =lang.this_line(__name__)
 		)
 
 		if answer is None:
@@ -619,8 +711,12 @@ def bs_memory(args):
 	def open_memory_file(file_info):
 		overwrite = False
 
-		if len(file_info) == 1  : file_path = input(f"\n{LANGUAGE.inp.open_path}> ")
-		elif len(file_info) == 2: file_path = file_info[1]
+		if len(file_info) == 1:
+			file_path = input(f"\n{LANGUAGE.inp.open_path}> ")
+
+		elif len(file_info) == 2:
+			file_path = file_info[1]
+
 		elif len(file_info) == 3:
 			file_path = file_info[1]
 
@@ -632,26 +728,37 @@ def bs_memory(args):
 			print(f"{LANGUAGE.err.invalid_arg} '{file_info[3]}'\n")
 			return
 
+		file_path = file_path.replace("/", "\\")
+
 		lang.write_info_log(
 			message=f"Open file path: {file_path}",
-			module= "new_cmds.py|bs_memory()|open_memory_file()"
+			module =lang.this_line(__name__)
 		)
+
+		if (len(file_path) <= 5 or file_path[-5:] != ".calc") or \
+		   (len(file_path) <= 4 or file_path[-4:] != ".mem"):
+			name = input(f"\n{LANGUAGE.inp.file_name}> ")
+
+			if (len(name) <= 5 or name[-5:] != ".calc") or \
+			   (len(name) <= 4 or name[-5:] != ".mem"):
+				name += ".calc"
+
+			file_path = os.path.join(file_path, name)
 
 		lang.write_info_log(
 			message=f"overwrite = {overwrite}",
-			module= "new_cmds.py|bs_memory()|open_memory_file()"
+			module =lang.this_line(__name__)
 		)
 
-		if   len(file_path) >= 5 and file_path[-5:] == ".calc": is_old_mem = False
-		elif len(file_path) >= 4 and file_path[-4:] == ".mem" : is_old_mem = True
-		else:
-			file_path += "/" if file_path != "" else ""
-			file_path += input(f"\n{LANGUAGE.inp.file_name}> ") + ".calc"
+		if len(file_path) >= 5 and file_path[-5:] == ".calc":
 			is_old_mem = False
+
+		elif len(file_path) >= 4 and file_path[-4:] == ".mem":
+			is_old_mem = True
 
 		lang.write_info_log(
 			message=f"Open file name: {file_path}",
-			module= "new_cmds.py|bs_memory()|open_memory_file()|if"
+			module =lang.this_line(__name__)
 		)
 
 		with open(file_path, "r") as mem_file:
@@ -677,7 +784,7 @@ def bs_memory(args):
 			for key in new_mem:
 				nums_func.memory[key] = new_mem[key]
 
-		print("'" + file_path.replace("/", "\\") + "' " + LANGUAGE.msg.file_opened + "\n")
+		print(f"'{file_path}' {LANGUAGE.msg.file_opened}\n")
 
 
 	def save_memory_file(file_info):
@@ -691,12 +798,21 @@ def bs_memory(args):
 			print(f"{LANGUAGE.err.invalid_arg} '{file_info[2]}'\n")
 			return
 
-		if len(file_path) >= 5 and file_path[-5:] != ".calc":  # If the name has been put in the path
-			file_path += "/" + input(f"\n{LANGUAGE.inp.file_name}> ") + ".calc"
+		file_path = file_path.replace("/", "\\")
+
+		if len(file_path) <= 5 or file_path[-5:] != ".calc":
+			name = input(f"\n{LANGUAGE.inp.file_name}> ")
+
+			if len(name) <= 5 or name[-5:] != ".calc":
+				name += ".calc"
+
+			file_path = os.path.join(file_path, name)
+
+		file_path = file_path.replace("/", "\\")
 
 		lang.write_info_log(
 			message=f"Save file path: {file_path}",
-			module= "new_cmds.py|bs_memory()|save_memory_file()"
+			module =lang.this_line(__name__)
 		)
 
 		last_slash = 0
@@ -706,8 +822,10 @@ def bs_memory(args):
 
 		file_name = file_path[last_slash:-5].lower()  # The -5 removes .calc
 		RESERVED_FILE_NAMES = [
-			"con","prn", "aux", "nul", "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com7", "com8", "com9",
-			"com0", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9", "lpt0"
+			"con",  "prn",  "aux",  "nul",  "com1", "com2", "com3", "com4",
+			"com5", "com6", "com7", "com7", "com8", "com9", "com0", "lpt1", 
+			"lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9",
+			"lpt0"
 		]
 
 		if file_name in RESERVED_FILE_NAMES:
@@ -718,7 +836,7 @@ def bs_memory(args):
 		with open(file_path, "w") as mem_file:
 			json.dump(mem_to_save, mem_file)
 
-		print(LANGUAGE.msg.file_saved + " " + file_path.replace("/", "\\"), "\n")
+		print(f"{LANGUAGE.msg.file_saved} {file_path}\n")
 
 
 	if settings.settings["literal"]:
@@ -737,33 +855,33 @@ def bs_memory(args):
 
 	elif len(args) >= 1 and args[0] == "save": save_memory_file(args)
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def bs_literal():
 	switch_settings("literal")
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def ad_exit():
 	raise StopIteration
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def ad_debug():
 	switch_settings("debug_mode")
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def ad_ignore_prth():
 	switch_settings("ignore_prth")
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def ad_path():
-	print(os.path.abspath("."), "\n")
-	pyperclip.copy(os.path.abspath("."))
+	print(LOCAL_DIR, "\n")
+	pyperclip.copy(LOCAL_DIR)
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def ad_process():
 	with open("settings/process_count.json") as j_process:
@@ -771,11 +889,13 @@ def ad_process():
 	print(process[0])
 	print()
 
-#-----------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 def bs_operations_history(args):
+	CALC_HISTORY_PATH = "other/info/calc_history/calculations_history.txt"
+
 	def show():
-		with open("other/info/calc_history/calculations_history.txt", "r") as calc_hs:
+		with open(CALC_HISTORY_PATH, "r") as calc_hs:
 			is_empty = True
 
 			for line in calc_hs:
@@ -796,7 +916,7 @@ def bs_operations_history(args):
 			print(LANGUAGE.err.invalid_answer)
 
 		elif answer:
-			with open("other/info/calc_history/calculations_history.txt", "w"):
+			with open(CALC_HISTORY_PATH, "w"):
 				pass
 
 			print(LANGUAGE.msg.ophs_res)
