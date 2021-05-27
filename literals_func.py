@@ -2,7 +2,7 @@
 # Local dependencies
 ################################
 from literals import Pol, Mon
-from lang import write_error_log
+import lang
 import settings
 import nums_func
 
@@ -23,10 +23,10 @@ def find_mon(string: str) -> OptionalPol:
         try:
             int(char)
         except ValueError:
-            write_error_log(
-                "ValueError",
-                "literals_func.py|find_mon()|for|except",
-                settings.settings["debug_mode"]
+            lang.write_error_log(
+                message="ValueError",
+                module =lang.this_line(__name__),
+                print_message=settings.settings["debug_mode"]
             )
 
             if char == "-":
@@ -60,13 +60,16 @@ def find_mon(string: str) -> OptionalPol:
     letters = {}
     last_letter = ""
     temp_number = ""
-    ciphers = "0123456789^."  # The "^" character is there just to not be considered in the letters
-    allowed_letters = "abcdefghijklmnopqrstuvwxyz"  # To avoid not-operating symbols (@#?...) being considered letters
+    ciphers = "0123456789^."
+    allowed_letters = "abcdefghijklmnopqrstuvwxyz"
     literal = string[literal_start + negative_num + explicit_positive:]
 
     for char in literal:
         if (char not in ciphers) and (char in allowed_letters):
-            letters[last_letter] = 1.0 if temp_number == "" else nums_func.find_num(temp_number)
+            if not temp_number:
+                letters[last_letter] = 1.0
+            else:
+                letters[last_letter] = nums_func.find_num(temp_number)
 
             temp_number = ""
             letters[char] = 1.0
@@ -78,7 +81,10 @@ def find_mon(string: str) -> OptionalPol:
         else:
             return None
 
-    letters[last_letter] = 1.0 if temp_number == "" else nums_func.find_num(temp_number)
+    if not temp_number:
+        letters[last_letter] = 1.0
+    else:
+        letters[last_letter] = nums_func.find_num(temp_number)
 
     letters[""] = 1.0
 
