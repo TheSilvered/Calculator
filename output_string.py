@@ -1,6 +1,3 @@
-################################
-# Local dependencies
-################################
 import settings
 import lang
 from literals_func import str_literal

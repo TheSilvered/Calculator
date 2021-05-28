@@ -1,6 +1,3 @@
-################################
-# Local dependencies
-################################
 import new_cmds
 import lang
 import settings
