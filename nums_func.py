@@ -1,8 +1,5 @@
-################################
-# Local dependencies
-################################
 import lang
-import settings as sets
+import settings
 
 LANGUAGE = lang.language
 OptionalFloat = float, None
@@ -15,7 +12,7 @@ def find_num(string: str, use_mem=True) -> OptionalFloat:
     char_quantity = {"points": 0, "commas": 0}
     char_last_pos = {"points": 0, "commas": 0}
 
-    if sets.settings["accept_all"]:
+    if settings.settings["accept_all"]:
         for index, char in enumerate(string):
             if char == ".":
                 char_quantity["points"] += 1
@@ -38,7 +35,7 @@ def find_num(string: str, use_mem=True) -> OptionalFloat:
             else:
                 ignore_char_list += ","
 
-    elif sets.settings["us_uk_sys"]:
+    elif settings.settings["us_uk_sys"]:
         ignore_char_list = ["(", ")", ","]
     else:
         ignore_char_list = ["(", ")", "."]
@@ -54,7 +51,7 @@ def find_num(string: str, use_mem=True) -> OptionalFloat:
         lang.write_error_log(
             message="ValueError",
             module =lang.this_line(__name__),
-            print_message=sets.settings["debug_mode"]
+            print_message=settings.settings["debug_mode"]
         )
 
         try:
@@ -67,7 +64,7 @@ def find_num(string: str, use_mem=True) -> OptionalFloat:
             lang.write_error_log(
                 message="KeyError",
                 module =lang.this_line(__name__),
-                print_message=sets.settings["debug_mode"]
+                print_message=settings.settings["debug_mode"]
             )
 
             return None
@@ -146,7 +143,7 @@ def fix(number) -> OptionalFloat:
                 lang.write_error_log(
                     message="ValueError",
                     module =lang.this_line(__name__),
-                    print_message=sets.settings["debug_mode"]
+                    print_message=settings.settings["debug_mode"]
                 )
 
                 fixed_number = str(int(string[:nines_start]) + 1)
@@ -162,7 +159,7 @@ def fix(number) -> OptionalFloat:
             lang.write_error_log(
                 message="ValueError",
                 module =lang.this_line(__name__),
-                print_message=sets.settings["debug_mode"]
+                print_message=settings.settings["debug_mode"]
             )
 
             return number
@@ -179,7 +176,7 @@ def num_to_str(number: float) -> str:
         lang.write_error_log(
             message="OverflowError",
             module =lang.this_line(__name__),
-            print_message=sets.settings["debug_mode"]
+            print_message=settings.settings["debug_mode"]
         )
 
         return LANGUAGE.lan.infinity
@@ -188,7 +185,7 @@ def num_to_str(number: float) -> str:
         lang.write_error_log(
             message="TypeError",
             module =lang.this_line(__name__),
-            print_message=sets.settings["debug_mode"]
+            print_message=settings.settings["debug_mode"]
         )
 
         if type(number) is complex:
@@ -225,14 +222,14 @@ def num_to_str(number: float) -> str:
 
         for i in range(len(abs_number) % 3, len(abs_number)):
             if len(string_number) % 3 == 0 and i != 0:
-                take_number += "," if sets.settings["us_uk_sys"] else "."
+                take_number += "," if settings.settings["us_uk_sys"] else "."
             take_number += str(abs_number)[i]
             string_number += str(abs_number)[i]
 
         if number > int(number):
             for i in range(len(str(int(number))), len(str(number))):
                 if str(number)[i] == ".":
-                    take_number += "." if sets.settings["us_uk_sys"] else ","
+                    take_number += "." if settings.settings["us_uk_sys"] else ","
                 else:
                     take_number += str(number)[i]
 
@@ -242,7 +239,7 @@ def num_to_str(number: float) -> str:
         if number > int(number):
             for char in str(number):
                 if char == ".":
-                    take_number += "." if sets.settings["us_uk_sys"] else ","
+                    take_number += "." if settings.settings["us_uk_sys"] else ","
                 else:
                     take_number += char
             string_number = take_number

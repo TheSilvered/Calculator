@@ -1,13 +1,7 @@
-################################
-# Local dependencies
-################################
-import lang_attrs
-
-################################
-# External modules
-################################
 import json
 from inspect import currentframe
+
+import lang_attrs
 
 language = lang_attrs.Language
 
@@ -83,7 +77,7 @@ def load_txt(acronym: str, lang_dir: str = "langs", log=True):
     prev_invalid_attr = ""
     first_line = False
 
-    for l_no, l_no in enumerate(file):
+    for l_no, l in enumerate(file):
         if l[0] == "$":
             main_set = l.replace("$", "").replace("\n", "")
 
@@ -120,7 +114,7 @@ def load_txt(acronym: str, lang_dir: str = "langs", log=True):
     if log:
         write_info_log(
             message="Text loaded",
-            module ="lang.py|load_txt()"
+            module =this_line(__name__)
         )
 
     return language

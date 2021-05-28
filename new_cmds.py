@@ -1,18 +1,12 @@
-################################
-# Local dependencies
-################################
+import pyperclip
+
+import json
+import os
+
 import lang
 import settings
 import nums_func
 import cmds_parser
-
-################################
-# External modules
-################################
-import json
-import os
-import pyperclip
-from inspect import currentframe
 
 LANGUAGE = lang.language
 LOCAL_DIR = os.path.abspath(".")

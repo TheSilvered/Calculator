@@ -1,6 +1,3 @@
-################################
-# Local dependencies
-################################
 from literals import Pol, Mon
 import lang
 import settings

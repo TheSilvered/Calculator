@@ -1,16 +1,10 @@
-################################
-# Local dependencies
-################################
+from copy import copy
+
 import lang
 import literals
 import settings
 from literals_func import find_mon
 from nums_func import find_num
-
-################################
-# External modules
-################################
-from copy import copy
 
 
 class Expression:
